@@ -53,6 +53,7 @@ export default function App() {
           questions={questions}
           difficulty={difficulty}
           onGameEnd={handleGameEnd}
+          onExit={() => setScreen('start')}
         />
       )}
 

@@ -95,7 +95,7 @@ function reducer(state, action) {
   }
 }
 
-export default function GameScreen({ questions, difficulty, onGameEnd }) {
+export default function GameScreen({ questions, difficulty, onGameEnd, onExit }) {
   const [state, dispatch] = useReducer(reducer, difficulty, init)
   const stateRef = useRef(state)
   stateRef.current = state
@@ -188,6 +188,7 @@ export default function GameScreen({ questions, difficulty, onGameEnd }) {
   return (
     <div className="screen">
       <div className="hud">
+        <button className="home-btn" onClick={onExit} title="Back to menu">🏠</button>
         <div className="hud-pill">⭐ {state.score}</div>
         <div className="timer-ring">
           <svg viewBox="0 0 60 60" width="60" height="60">
