@@ -113,6 +113,7 @@ export default function NarayaniyamGame() {
   const [hist, setHist] = useState(() => load("nm_hist", []));
   const [filter, setFilter] = useState("all");
   const [selDasakam, setSelDasakam] = useState(null);
+  const [selVerse, setSelVerse] = useState(null);
   const [search, setSearch] = useState("");
   const [verse, setVerse] = useState(false);
   const [qIdx, setQIdx] = useState(0);
@@ -371,33 +372,59 @@ export default function NarayaniyamGame() {
     );
   }
 
-  // DASAKAM 100 VERSES — 11 cards with Sanskrit and meaning
+  // DASAKAM 100 VERSES — list of 11 clickable cards
   if (screen === "d100verses") {
     return (
     <div style={s.root}><div style={s.bg}/>
-      <div style={{...s.wrap,maxWidth:760}}>
+      <div style={s.wrap}>
         <button style={s.back} onClick={()=>{setSelDasakam(100);setScreen("dasakam")}}>← Back</button>
         <div style={{textAlign:"center",marginBottom:20}}>
           <div style={{fontSize:36,color:SAFFRON,marginBottom:8}}>ॐ</div>
           <h2 style={{fontSize:22,color:G,margin:"0 0 4px",fontWeight:"bold"}}>Dasakam 100 — Phala Shruti</h2>
-          <p style={{fontSize:13,color:"#a09080",margin:0,fontStyle:"italic"}}>The Vision of Guruvāyūrappan — Verse by Verse</p>
+          <p style={{fontSize:13,color:"#a09080",margin:0,fontStyle:"italic"}}>The Vision of Guruvāyūrappan — 11 Verses</p>
         </div>
-        <div style={{display:"flex",flexDirection:"column",gap:16}}>
+        <div style={{display:"flex",flexDirection:"column",gap:8}}>
           {DASAKAM_100.map(v => (
-            <div key={v.v} style={{background:"#141414",border:`1px solid ${BO}`,borderRadius:12,padding:"18px",borderLeft:`4px solid ${SAFFRON}`,boxShadow:"0 2px 8px rgba(0,0,0,0.3)"}}>
-              <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-                <span style={{fontSize:14,fontWeight:"bold",color:SAFFRON,background:"rgba(212,122,46,0.1)",borderRadius:"50%",width:28,height:28,display:"flex",alignItems:"center",justifyContent:"center"}}>{v.v}</span>
-                <span style={{fontSize:12,color:"#888"}}>Verse {v.v} of 11</span>
-              </div>
-              <p style={{fontSize:16,color:"#e8d8b0",lineHeight:2,margin:"0 0 12px",fontFamily:"serif",whiteSpace:"pre-line"}}>{v.sk}</p>
-              <div style={{borderTop:"1px solid rgba(255,255,255,0.06)",paddingTop:10}}>
-                <p style={{fontSize:13,color:"#c0b8a0",lineHeight:1.8,margin:0}}>{v.en}</p>
+            <div key={v.v} style={{background:"#141414",border:`1px solid rgba(255,255,255,0.08)`,borderRadius:10,padding:"14px 16px",borderLeft:`4px solid ${SAFFRON}`,cursor:"pointer",boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}} onClick={()=>{setSelVerse(v.v);setScreen("d100verse")}}>
+              <div style={{display:"flex",alignItems:"center",gap:10}}>
+                <span style={{fontSize:14,fontWeight:"bold",color:SAFFRON,background:"rgba(212,122,46,0.1)",borderRadius:"50%",width:28,height:28,minWidth:28,display:"flex",alignItems:"center",justifyContent:"center"}}>{v.v}</span>
+                <span style={{fontSize:13,color:"#d0c8b8",flex:1,lineHeight:1.5}}>{v.sk.split("\n")[0].slice(0,60)}…</span>
               </div>
             </div>
           ))}
         </div>
         <p style={{textAlign:"center",color:G,fontSize:14,marginTop:24,fontStyle:"italic"}}>॥ इति नारायणीयं सम्पूर्णम् ॥</p>
         <p style={{textAlign:"center",color:"#7a7060",fontSize:12,marginTop:4}}>Guruvāyūrappan Śaraṇam 🙏</p>
+      </div>
+    </div>
+    );
+  }
+
+  // SINGLE VERSE DETAIL — Sanskrit + meaning
+  if (screen === "d100verse" && selVerse) {
+    const v = DASAKAM_100.find(x => x.v === selVerse);
+    if (!v) return null;
+    const prevV = selVerse > 1 ? selVerse - 1 : null;
+    const nextV = selVerse < 11 ? selVerse + 1 : null;
+    return (
+    <div style={s.root}><div style={s.bg}/>
+      <div style={s.wrap}>
+        <button style={s.back} onClick={()=>setScreen("d100verses")}>← Back</button>
+        <div style={{textAlign:"center",marginBottom:16}}>
+          <span style={{fontSize:12,color:SAFFRON,letterSpacing:2,textTransform:"uppercase"}}>Dasakam 100 — Verse {v.v} of 11</span>
+        </div>
+        <div style={{background:"#141414",border:`1px solid ${BO}`,borderRadius:14,padding:"20px",borderLeft:`4px solid ${SAFFRON}`,boxShadow:"0 2px 10px rgba(0,0,0,0.3)",marginBottom:16}}>
+          <p style={{fontSize:18,color:"#e8d8b0",lineHeight:2.2,margin:0,fontFamily:"serif",whiteSpace:"pre-line",textAlign:"center"}}>{v.sk}</p>
+        </div>
+        <div style={{background:"linear-gradient(135deg, rgba(212,122,46,0.08), rgba(122,106,170,0.05))",border:`1px solid ${BO}`,borderRadius:12,padding:"18px",marginBottom:16}}>
+          <p style={{fontSize:12,color:SAFFRON,fontWeight:"bold",letterSpacing:1,marginBottom:8}}>MEANING</p>
+          <p style={{fontSize:14,color:"#d0c8b0",lineHeight:1.9,margin:0}}>{v.en}</p>
+        </div>
+        <div style={{display:"flex",gap:8,justifyContent:"center"}}>
+          {prevV&&<button style={s.btnS} onClick={()=>setSelVerse(prevV)}>← Verse {prevV}</button>}
+          {nextV&&<button style={s.btnP} onClick={()=>setSelVerse(nextV)}>Verse {nextV} →</button>}
+          {!nextV&&<button style={s.btnP} onClick={()=>setScreen("d100verses")}>✦ All Verses</button>}
+        </div>
       </div>
     </div>
     );
