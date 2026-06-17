@@ -170,8 +170,11 @@ export default function NarayaniyamGame() {
     </div>
   );
 
-  // HOME (screen 3 — game controls)
-  if (screen === "home") return (
+  // HOME (screen 3 — dasakam groups + stats + controls)
+  if (screen === "home") {
+    const groupRanges = ranges.filter(r => r !== "all");
+    const groupTints = ["#b8860b","#2e8b57","#3a7ec0","#c05070","#7a6a40","#2a8a82","#c87830","#7a6aaa","#8a7a30","#3a8a6a"];
+    return (
     <div style={s.root}><div style={s.bg}/>
       <div style={{...s.wrap,display:"flex",flexDirection:"column",alignItems:"center",gap:14,paddingTop:40}}>
         <div style={{position:"absolute",top:16,left:16,right:16,display:"flex",justifyContent:"space-between"}}>
@@ -180,8 +183,24 @@ export default function NarayaniyamGame() {
         </div>
         <div style={s.om}>ॐ</div>
         <h1 style={s.h1}>Śrīman Nārāyaṇīyam</h1>
-        <p style={s.sub}>Quiz — All 100 Daśakams</p>
-        <button style={{...s.btnP,padding:"13px 36px",fontSize:15}} onClick={()=>setScreen("select")}>Choose a Daśakam →</button>
+        <p style={{...s.ptit,fontSize:18,marginBottom:2,marginTop:12}}>Choose a Daśakam Group</p>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,width:"100%"}}>
+          {groupRanges.map((r,ri) => {
+            const [lo,hi] = r.split("-").map(Number);
+            const group = ALL.filter(d => d.n >= lo && d.n <= hi);
+            const doneCount = group.filter(d => done.has(d.n)).length;
+            const tint = groupTints[ri] || G;
+            return (
+              <button key={r} style={s.groupBtn} onClick={()=>{setFilter(r);setScreen("group")}}>
+                <span style={{fontSize:13,fontWeight:"bold",color:tint}}>{r}</span>
+                <div style={{width:"100%",height:3,borderRadius:2,background:"rgba(255,255,255,0.1)",overflow:"hidden"}}>
+                  <div style={{width:`${doneCount/group.length*100}%`,height:"100%",borderRadius:2,background:tint,opacity:0.5,transition:"width 0.3s"}}/>
+                </div>
+                <span style={{fontSize:9,color:"#888"}}>{doneCount}/{group.length}</span>
+              </button>
+            );
+          })}
+        </div>
         <div style={s.statsBar}>
           {[["Questions",total,SAFFRON,"rgba(212,122,46,0.08)","rgba(212,122,46,0.2)"],["Correct",score,TEAL,"rgba(42,138,130,0.08)","rgba(42,138,130,0.2)"],["Accuracy",acc+"%",VIOLET,"rgba(122,106,170,0.08)","rgba(122,106,170,0.2)"],["Streak",streak,LOTUS,"rgba(192,80,112,0.08)","rgba(192,80,112,0.2)"]].map(([l,v,c,bg,bd])=>(
             <div key={l} style={{...s.statBox,background:bg,border:`1px solid ${bd}`}}><div style={{...s.sv,color:c}}>{v}</div><div style={{...s.sl,color:c,opacity:0.6}}>{l}</div></div>
@@ -195,7 +214,8 @@ export default function NarayaniyamGame() {
         <p style={s.foot}>Guruvāyūrappan Śaraṇam 🙏</p>
       </div>
     </div>
-  );
+    );
+  }
 
   // HISTORY
   if (screen === "hist") return (
@@ -216,37 +236,6 @@ export default function NarayaniyamGame() {
     </div>
   );
 
-  // SELECT
-  if (screen === "select") {
-    const groupRanges = ranges.filter(r => r !== "all");
-    const groupTints = ["#b8860b","#2e8b57","#3a7ec0","#c05070","#7a6a40","#2a8a82","#c87830","#7a6aaa","#8a7a30","#3a8a6a"];
-    return (
-    <div style={s.root}><div style={s.bg}/>
-      <div style={s.wrap}>
-        <button style={s.back} onClick={()=>setScreen("home")}>← Home</button>
-        <p style={{...s.ptit,fontSize:18,marginBottom:10}}>Choose a Dasakam Group</p>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-          {groupRanges.map((r,ri) => {
-            const [lo,hi] = r.split("-").map(Number);
-            const group = ALL.filter(d => d.n >= lo && d.n <= hi);
-            const doneCount = group.filter(d => done.has(d.n)).length;
-            const tint = groupTints[ri] || G;
-            return (
-              <button key={r} style={s.groupBtn} onClick={()=>{setFilter(r);setScreen("group")}}>
-                <span style={{fontSize:13,fontWeight:"bold",color:tint}}>{r}</span>
-                <div style={{width:"100%",height:3,borderRadius:2,background:"rgba(255,255,255,0.1)",overflow:"hidden"}}>
-                  <div style={{width:`${doneCount/group.length*100}%`,height:"100%",borderRadius:2,background:tint,opacity:0.5,transition:"width 0.3s"}}/>
-                </div>
-                <span style={{fontSize:9,color:"#888"}}>{doneCount}/{group.length}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-    );
-  }
-
   // GROUP — shows the 10 dasakams with Sanskrit verse and meaning
   if (screen === "group" && filter !== "all") {
     const groupRanges = ranges.filter(r => r !== "all");
@@ -258,7 +247,7 @@ export default function NarayaniyamGame() {
     return (
     <div style={s.root}><div style={s.bg}/>
       <div style={s.wrap}>
-        <button style={s.back} onClick={()=>setScreen("select")}>← Back</button>
+        <button style={s.back} onClick={()=>setScreen("home")}>← Back</button>
         <p style={{...s.ptit,fontSize:20,marginBottom:16,color:tint}}>Dasakams {filter}</p>
         <div style={{display:"flex",flexDirection:"column",gap:14}}>
           {group.map(d => (
@@ -283,7 +272,7 @@ export default function NarayaniyamGame() {
     <div style={s.root}><div style={s.bg}/>
       <div style={s.wrap}>
         <div style={s.hdr}>
-          <button style={s.back} onClick={()=>setScreen("select")}>← Dasakams</button>
+          <button style={s.back} onClick={()=>setScreen("home")}>← Home</button>
           <div style={{display:"flex",gap:8,alignItems:"center"}}>
             <div style={s.chip}>🔥 {streak} | ✓ {score}/{total}</div>
 
@@ -338,7 +327,7 @@ export default function NarayaniyamGame() {
                 <button style={s.btnP} onClick={cont}>↺ Try Again</button>
                 <button style={s.btnP} onClick={next}>Next →</button>
                 <button style={s.btnS} onClick={rand}>🎲</button>
-                <button style={s.btnS} onClick={()=>setScreen("select")}>≡</button>
+                <button style={s.btnS} onClick={()=>setScreen("home")}>≡</button>
               </div>
             </div>
           )}
