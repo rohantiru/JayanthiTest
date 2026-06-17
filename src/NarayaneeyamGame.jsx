@@ -159,57 +159,42 @@ export default function NarayaniyamGame() {
         </div>
         <div style={{display:"flex",gap:12}}>
           <button style={s.btnS} onClick={()=>setScreen("title")}>← Back</button>
-          <button style={{...s.btnP,padding:"15px 40px",fontSize:16}} onClick={()=>setScreen("welcome")}>Continue →</button>
+          <button style={{...s.btnP,padding:"15px 40px",fontSize:16}} onClick={()=>setScreen("home")}>Continue →</button>
         </div>
       </div>
     </div>
   );
 
-  // WELCOME
-  if (screen === "welcome") return (
-    <div style={s.root}><div style={s.bg}/>
-      <div style={{...s.wrap,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:"100vh",gap:24,paddingTop:0}}>
-        <div style={{fontSize:56,lineHeight:1,color:TEAL}}>🙏</div>
-        <h2 style={{fontSize:26,fontWeight:"bold",textAlign:"center",color:G,margin:0,lineHeight:1.4}}>Welcome!</h2>
-        <p style={{fontSize:16,color:"#e0d8c8",lineHeight:1.8,textAlign:"center",maxWidth:440,margin:0}}>
-          Embark on a journey through the <span style={{color:G,fontWeight:"bold"}}>Śrīman Nārāyaṇīyam</span> — learn about each of the 100 Daśakams through an interactive quiz that brings the stories, philosophy, and devotion of this timeless work to life.
-        </p>
-        <div style={{background:"rgba(42,138,130,0.06)",border:"1px solid rgba(42,138,130,0.15)",borderRadius:12,padding:"16px 20px",maxWidth:380}}>
-          <p style={{fontSize:13,color:TEAL,lineHeight:1.7,margin:0,textAlign:"center"}}>
-            Each question explores a Daśakam's story, key verse, and deeper meaning — with insights drawn from traditional commentary.
-          </p>
-        </div>
-        <div style={{display:"flex",gap:12}}>
-          <button style={s.btnS} onClick={()=>setScreen("about")}>← Back</button>
-          <button style={{...s.btnP,padding:"15px 40px",fontSize:16}} onClick={()=>setScreen("home")}>Begin the Quiz →</button>
-        </div>
-      </div>
-    </div>
-  );
-
-  // HOME
+  // HOME (combined welcome + game screen)
   if (screen === "home") return (
     <div style={s.root}><div style={s.bg}/>
       <div style={{...s.wrap,display:"flex",flexDirection:"column",alignItems:"center",gap:12,paddingTop:40}}>
         <div style={{position:"absolute",top:16,left:16,right:16,display:"flex",justifyContent:"space-between"}}>
-          <button style={{fontSize:11,color:G,background:"transparent",border:`1px solid ${BO}`,borderRadius:8,padding:"5px 12px",cursor:"pointer",fontFamily:"Georgia,serif"}} onClick={()=>setScreen("welcome")}>← Back</button>
+          <button style={{fontSize:11,color:G,background:"transparent",border:`1px solid ${BO}`,borderRadius:8,padding:"5px 12px",cursor:"pointer",fontFamily:"Georgia,serif"}} onClick={()=>setScreen("about")}>← Back</button>
           <button onClick={toggleFullScreen} style={{fontSize:11,color:G,background:"transparent",border:`1px solid ${BO}`,borderRadius:8,padding:"5px 12px",cursor:"pointer",fontFamily:"Georgia,serif"}}>⛶ Full Screen</button>
         </div>
-        <div style={s.om}>ॐ</div>
+        <div style={{fontSize:48,lineHeight:1,color:TEAL}}>🙏</div>
         <h1 style={s.h1}>Śrīman Nārāyaṇīyam</h1>
-        <p style={s.sub}>Quiz — All 100 Daśakams</p>
+        <p style={{fontSize:14,color:"#e0d8c8",lineHeight:1.8,textAlign:"center",maxWidth:440,margin:"4px 0 0"}}>
+          Learn about each of the 100 Daśakams through an interactive quiz that brings the stories, philosophy, and devotion of this timeless work to life.
+        </p>
+        <div style={{background:"rgba(42,138,130,0.08)",border:"1px solid rgba(42,138,130,0.2)",borderRadius:12,padding:"12px 16px",maxWidth:380,marginBottom:4}}>
+          <p style={{fontSize:12,color:TEAL,lineHeight:1.7,margin:0,textAlign:"center"}}>
+            Each question explores a Daśakam's story, key verse, and deeper meaning — with insights drawn from traditional commentary.
+          </p>
+        </div>
+        <button style={{...s.btnP,padding:"13px 36px",fontSize:15}} onClick={()=>setScreen("select")}>Choose a Daśakam →</button>
         <div style={s.statsBar}>
-          {[["Questions",total,SAFFRON,"rgba(212,122,46,0.06)","rgba(212,122,46,0.15)"],["Correct",score,TEAL,"rgba(42,138,130,0.06)","rgba(42,138,130,0.15)"],["Accuracy",acc+"%",VIOLET,"rgba(122,106,170,0.06)","rgba(122,106,170,0.15)"],["Streak",streak,LOTUS,"rgba(192,80,112,0.06)","rgba(192,80,112,0.15)"]].map(([l,v,c,bg,bd])=>(
+          {[["Questions",total,SAFFRON,"rgba(212,122,46,0.08)","rgba(212,122,46,0.2)"],["Correct",score,TEAL,"rgba(42,138,130,0.08)","rgba(42,138,130,0.2)"],["Accuracy",acc+"%",VIOLET,"rgba(122,106,170,0.08)","rgba(122,106,170,0.2)"],["Streak",streak,LOTUS,"rgba(192,80,112,0.08)","rgba(192,80,112,0.2)"]].map(([l,v,c,bg,bd])=>(
             <div key={l} style={{...s.statBox,background:bg,border:`1px solid ${bd}`}}><div style={{...s.sv,color:c}}>{v}</div><div style={{...s.sl,color:c,opacity:0.6}}>{l}</div></div>
           ))}
         </div>
-        <div style={s.row}>
-          <button style={s.btnP} onClick={()=>setScreen("select")}>Begin Journey</button>
+        <div style={{display:"flex",gap:10,flexWrap:"wrap",justifyContent:"center"}}>
           <button style={s.btnS} onClick={rand}>🎲 Random</button>
+          {hist.length>0 && <button style={s.btnS} onClick={()=>setScreen("hist")}>View History</button>}
+          {total>0 && <button style={{...s.btnS,fontSize:11,color:"#c0a0b0",border:"1px solid rgba(160,100,130,0.3)",padding:"8px 16px"}} onClick={()=>{ if(window.confirm("Reset all scores and history?")){ setScore(0);setTotal(0);setStreak(0);setDone(new Set());setHist([]); ["nm_score","nm_total","nm_streak","nm_done","nm_hist"].forEach(k=>localStorage.removeItem(k)); } }}>Reset Progress</button>}
         </div>
-        {hist.length>0 && <button style={s.btnS} onClick={()=>setScreen("hist")}>View History</button>}
-        {total>0 && <button style={{...s.btnS,fontSize:11,color:"#c0a0b0",border:"1px solid rgba(160,100,130,0.3)",padding:"8px 16px"}} onClick={()=>{ if(window.confirm("Reset all scores and history?")){ setScore(0);setTotal(0);setStreak(0);setDone(new Set());setHist([]); ["nm_score","nm_total","nm_streak","nm_done","nm_hist"].forEach(k=>localStorage.removeItem(k)); } }}>Reset Progress</button>}
-        <p style={s.foot}>Guruvayurappan Sharanam 🙏</p>
+        <p style={s.foot}>Guruvāyūrappan Śaraṇam 🙏</p>
       </div>
     </div>
   );
