@@ -110,57 +110,57 @@ const D2 = [
 const ALL = [...D1, ...D2];
 
 // ── STYLES ────────────────────────────────────────────────────────────────────
-const G = "#e8b86d", DG = "#c49a3c", BG = "#0a0810";
-const PA = "rgba(255,255,255,0.05)", BO = "rgba(232,184,109,0.25)";
-const SAFFRON = "#e8944d", LOTUS = "#d4708a", TEAL = "#5cb8b2", VIOLET = "#9b8ec4", RUBY = "#d45c5c";
-const OPT_COLORS = ["#e8b86d","#5cb8b2","#d4708a","#9b8ec4"];
+const G = "#b8860b", DG = "#9a7209", BG = "#faf8f4";
+const PA = "rgba(0,0,0,0.02)", BO = "rgba(180,140,60,0.2)";
+const SAFFRON = "#d47a2e", LOTUS = "#c05070", TEAL = "#2a8a82", VIOLET = "#7a6aaa", RUBY = "#c04040";
+const OPT_COLORS = ["#b8860b","#2a8a82","#c05070","#7a6aaa"];
 
 const s = {
-  root:{minHeight:"100vh",background:BG,fontFamily:"Georgia,serif",color:"#f0e6d0",position:"relative"},
-  bg:{position:"fixed",top:0,left:0,right:0,bottom:0,background:"radial-gradient(ellipse at 20% 10%, rgba(180,100,30,0.10) 0%, transparent 40%), radial-gradient(ellipse at 80% 90%, rgba(90,60,160,0.08) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(80,140,140,0.05) 0%, transparent 60%)",pointerEvents:"none",zIndex:0},
+  root:{minHeight:"100vh",background:BG,fontFamily:"Georgia,serif",color:"#2a2018",position:"relative"},
+  bg:{position:"fixed",top:0,left:0,right:0,bottom:0,background:"radial-gradient(ellipse at 20% 10%, rgba(220,170,60,0.06) 0%, transparent 40%), radial-gradient(ellipse at 80% 90%, rgba(120,80,180,0.04) 0%, transparent 50%), radial-gradient(ellipse at 50% 50%, rgba(40,140,130,0.03) 0%, transparent 60%)",pointerEvents:"none",zIndex:0},
   wrap:{position:"relative",zIndex:1,maxWidth:640,margin:"0 auto",padding:"20px 16px 60px"},
-  om:{fontSize:72,lineHeight:1,color:SAFFRON,textShadow:`0 0 40px rgba(232,140,70,0.5), 0 0 80px rgba(160,80,180,0.2)`,textAlign:"center"},
-  h1:{fontSize:28,fontWeight:"bold",textAlign:"center",color:G,margin:"8px 0 0",textShadow:"0 1px 20px rgba(232,184,109,0.3)"},
-  sub:{fontSize:15,color:"#c8b89a",textAlign:"center",margin:"4px 0"},
-  byline:{fontSize:12,color:"#7a6a8a",textAlign:"center",fontStyle:"italic",margin:0},
+  om:{fontSize:72,lineHeight:1,color:SAFFRON,textShadow:"0 0 40px rgba(212,122,46,0.25)",textAlign:"center"},
+  h1:{fontSize:28,fontWeight:"bold",textAlign:"center",color:G,margin:"8px 0 0"},
+  sub:{fontSize:15,color:"#6a5a40",textAlign:"center",margin:"4px 0"},
+  byline:{fontSize:12,color:"#8a7a9a",textAlign:"center",fontStyle:"italic",margin:0},
   statsBar:{display:"flex",gap:8,flexWrap:"wrap",justifyContent:"center",margin:"16px 0"},
   statBox:{borderRadius:10,padding:"8px 14px",textAlign:"center",minWidth:65},
   sv:{fontSize:20,fontWeight:"bold"},
   sl:{fontSize:10,marginTop:2},
-  btnP:{background:`linear-gradient(135deg,${SAFFRON},${DG})`,color:"#1a0f00",border:"none",borderRadius:12,padding:"13px 28px",fontSize:14,fontWeight:"bold",cursor:"pointer",fontFamily:"Georgia,serif",boxShadow:"0 4px 20px rgba(232,140,70,0.3)"},
+  btnP:{background:`linear-gradient(135deg,${SAFFRON},${G})`,color:"#fff",border:"none",borderRadius:12,padding:"13px 28px",fontSize:14,fontWeight:"bold",cursor:"pointer",fontFamily:"Georgia,serif",boxShadow:"0 4px 16px rgba(212,122,46,0.25)"},
   btnS:{background:"transparent",color:G,border:`1px solid ${BO}`,borderRadius:12,padding:"11px 20px",fontSize:13,cursor:"pointer",fontFamily:"Georgia,serif"},
   row:{display:"flex",gap:10,flexWrap:"wrap",justifyContent:"center",margin:"4px 0"},
-  foot:{fontSize:12,color:"#4a3a5a",textAlign:"center",marginTop:12},
+  foot:{fontSize:12,color:"#b0a090",textAlign:"center",marginTop:12},
   back:{background:"transparent",color:G,border:`1px solid ${BO}`,borderRadius:8,padding:"7px 14px",fontSize:12,cursor:"pointer",fontFamily:"Georgia,serif",marginBottom:14},
   ptit:{fontSize:22,color:G,textAlign:"center",margin:"0 0 14px"},
-  inp:{width:"100%",background:PA,border:`1px solid ${BO}`,borderRadius:10,padding:"9px 14px",color:"#f0e6d0",fontSize:13,fontFamily:"Georgia,serif",boxSizing:"border-box",marginBottom:10,outline:"none"},
+  inp:{width:"100%",background:"#fff",border:`1px solid ${BO}`,borderRadius:10,padding:"9px 14px",color:"#2a2018",fontSize:13,fontFamily:"Georgia,serif",boxSizing:"border-box",marginBottom:10,outline:"none"},
   frow:{display:"flex",flexWrap:"wrap",gap:6,marginBottom:10},
-  fb:{background:PA,border:`1px solid ${BO}`,borderRadius:16,padding:"5px 12px",fontSize:11,color:"#b8a88a",cursor:"pointer",fontFamily:"Georgia,serif"},
-  fba:{background:G,color:"#1a0f00",borderColor:G,fontWeight:"bold"},
+  fb:{background:PA,border:`1px solid ${BO}`,borderRadius:16,padding:"5px 12px",fontSize:11,color:"#6a5a40",cursor:"pointer",fontFamily:"Georgia,serif"},
+  fba:{background:G,color:"#fff",borderColor:G,fontWeight:"bold"},
   grid:{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(145px,1fr))",gap:8},
-  card:{background:PA,border:`1px solid ${BO}`,borderRadius:10,padding:"10px",cursor:"pointer",textAlign:"left",display:"flex",flexDirection:"column",gap:3,position:"relative",fontFamily:"Georgia,serif",color:"#f0e6d0"},
-  cdone:{background:"rgba(232,184,109,0.1)",borderColor:"rgba(232,184,109,0.5)"},
+  card:{background:"#fff",border:`1px solid ${BO}`,borderRadius:10,padding:"10px",cursor:"pointer",textAlign:"left",display:"flex",flexDirection:"column",gap:3,position:"relative",fontFamily:"Georgia,serif",color:"#2a2018"},
+  cdone:{background:"rgba(42,138,130,0.06)",borderColor:"rgba(42,138,130,0.3)"},
   hdr:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14},
-  chip:{background:"rgba(155,142,196,0.15)",border:"1px solid rgba(155,142,196,0.3)",borderRadius:16,padding:"5px 12px",fontSize:12,color:VIOLET},
-  banner:{background:"linear-gradient(135deg, rgba(232,148,77,0.12), rgba(155,142,196,0.08))",border:`1px solid ${BO}`,borderRadius:12,padding:"14px 16px",marginBottom:10},
-  vbtn:{background:"rgba(92,184,178,0.08)",border:"1px solid rgba(92,184,178,0.25)",borderRadius:8,padding:"7px 14px",fontSize:12,color:TEAL,cursor:"pointer",fontFamily:"Georgia,serif",marginBottom:8},
-  vbox:{background:"rgba(92,184,178,0.06)",border:"1px solid rgba(92,184,178,0.2)",borderRadius:10,padding:"14px",marginBottom:12,borderLeft:`4px solid ${TEAL}`},
-  qbox:{background:"rgba(255,255,255,0.03)",border:`1px solid rgba(255,255,255,0.08)`,borderRadius:14,padding:"18px"},
-  qt:{fontSize:15,lineHeight:1.7,color:"#f0e6d0",marginBottom:16,fontWeight:"500"},
+  chip:{background:"rgba(122,106,170,0.1)",border:"1px solid rgba(122,106,170,0.25)",borderRadius:16,padding:"5px 12px",fontSize:12,color:VIOLET},
+  banner:{background:"linear-gradient(135deg, rgba(212,122,46,0.06), rgba(122,106,170,0.04))",border:`1px solid ${BO}`,borderRadius:12,padding:"14px 16px",marginBottom:10},
+  vbtn:{background:"rgba(42,138,130,0.06)",border:"1px solid rgba(42,138,130,0.2)",borderRadius:8,padding:"7px 14px",fontSize:12,color:TEAL,cursor:"pointer",fontFamily:"Georgia,serif",marginBottom:8},
+  vbox:{background:"rgba(42,138,130,0.04)",border:"1px solid rgba(42,138,130,0.15)",borderRadius:10,padding:"14px",marginBottom:12,borderLeft:`4px solid ${TEAL}`},
+  qbox:{background:"#fff",border:"1px solid rgba(0,0,0,0.08)",borderRadius:14,padding:"18px",boxShadow:"0 2px 12px rgba(0,0,0,0.04)"},
+  qt:{fontSize:15,lineHeight:1.7,color:"#2a2018",marginBottom:16,fontWeight:"500"},
   opts:{display:"flex",flexDirection:"column",gap:8},
-  opt:{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:10,padding:"12px 14px",textAlign:"left",cursor:"pointer",color:"#d8c8b0",fontSize:13,display:"flex",gap:10,alignItems:"center",fontFamily:"Georgia,serif",transition:"all 0.15s"},
-  oc:{background:"rgba(92,184,120,0.2)",borderColor:"rgba(92,184,120,0.5)",color:"#b0f0c0"},
-  ow:{background:"rgba(212,92,92,0.2)",borderColor:"rgba(212,92,92,0.4)",color:"#f0b0b0"},
+  opt:{background:"#faf8f4",border:"1px solid rgba(0,0,0,0.08)",borderRadius:10,padding:"12px 14px",textAlign:"left",cursor:"pointer",color:"#3a3028",fontSize:13,display:"flex",gap:10,alignItems:"center",fontFamily:"Georgia,serif",transition:"all 0.15s"},
+  oc:{background:"rgba(42,138,80,0.1)",borderColor:"rgba(42,138,80,0.4)",color:"#1a6a30"},
+  ow:{background:"rgba(192,64,64,0.08)",borderColor:"rgba(192,64,64,0.3)",color:"#a03030"},
   ol:{fontSize:11,width:24,height:24,minWidth:24,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontWeight:"bold"},
-  rbox:{marginTop:16,background:"linear-gradient(135deg, rgba(232,184,109,0.06), rgba(155,142,196,0.04))",border:`1px solid ${BO}`,borderRadius:12,padding:"16px"},
+  rbox:{marginTop:16,background:"linear-gradient(135deg, rgba(212,122,46,0.04), rgba(122,106,170,0.03))",border:`1px solid ${BO}`,borderRadius:12,padding:"16px"},
   rh:{fontSize:16,fontWeight:"bold",marginBottom:8},
-  exp:{fontSize:13,color:"#d0c0a0",lineHeight:1.7,marginBottom:10},
-  ff:{background:"rgba(92,184,178,0.06)",border:"1px solid rgba(92,184,178,0.15)",borderRadius:8,padding:"9px 12px",marginBottom:12},
-  hi:{background:PA,borderRadius:9,padding:"10px 14px",display:"flex",flexDirection:"column",gap:3},
-  groupBtn:{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:12,padding:"10px 12px",cursor:"pointer",fontFamily:"Georgia,serif",display:"flex",flexDirection:"column",alignItems:"center",gap:3,transition:"all 0.2s"},
-  groupBtnOpen:{background:"rgba(232,184,109,0.15)",border:`1px solid ${BO}`},
-  listCard:{width:"100%",background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:8,padding:"9px 12px",cursor:"pointer",textAlign:"left",fontFamily:"Georgia,serif",color:"#f0e6d0",transition:"all 0.15s"},
-  listCardDone:{background:"rgba(120,180,120,0.06)",borderColor:"rgba(120,180,120,0.2)"},
+  exp:{fontSize:13,color:"#4a3a28",lineHeight:1.7,marginBottom:10},
+  ff:{background:"rgba(42,138,130,0.04)",border:"1px solid rgba(42,138,130,0.12)",borderRadius:8,padding:"9px 12px",marginBottom:12},
+  hi:{background:"#fff",border:"1px solid rgba(0,0,0,0.06)",borderRadius:9,padding:"10px 14px",display:"flex",flexDirection:"column",gap:3},
+  groupBtn:{background:"#fff",border:"1px solid rgba(0,0,0,0.08)",borderRadius:12,padding:"10px 12px",cursor:"pointer",fontFamily:"Georgia,serif",display:"flex",flexDirection:"column",alignItems:"center",gap:3,transition:"all 0.2s",boxShadow:"0 1px 4px rgba(0,0,0,0.04)"},
+  groupBtnOpen:{background:"rgba(184,134,11,0.06)",border:`1px solid ${BO}`},
+  listCard:{width:"100%",background:"#fff",border:"1px solid rgba(0,0,0,0.06)",borderRadius:8,padding:"9px 12px",cursor:"pointer",textAlign:"left",fontFamily:"Georgia,serif",color:"#2a2018",transition:"all 0.15s"},
+  listCardDone:{background:"rgba(42,138,130,0.04)",borderColor:"rgba(42,138,130,0.15)"},
 };
 
 // ── COMPONENT ─────────────────────────────────────────────────────────────────
@@ -202,14 +202,17 @@ export default function NarayaneeyamGame() {
   });
 
   function pick(d) {
-    const correctText = d.o[d.a];
-    const shuffled = [...d.o].sort(() => Math.random() - 0.5);
-    setSel({ ...d, o: shuffled, a: shuffled.indexOf(correctText) });
+    const questions = d.qs || [{q:d.q,o:d.o,a:d.a,exp:d.exp,fact:d.fact}];
+    const qi = Math.floor(Math.random() * questions.length);
+    const question = questions[qi];
+    const correctText = question.o[question.a];
+    const shuffled = [...question.o].sort(() => Math.random() - 0.5);
+    setSel({ ...d, ...question, o: shuffled, a: shuffled.indexOf(correctText) });
     setAns(null); setVerse(false); setScreen("play");
   }
   function rand() { pick(ALL[Math.floor(Math.random()*ALL.length)]); }
   function next() { const i = ALL.findIndex(x=>x.n===sel.n); pick(ALL[(i+1)%ALL.length]); }
-  function cont() { pick(sel); }  // same dasakam, new shuffle
+  function cont() { pick(sel); }
 
   function choose(i) {
     if (ans !== null) return;
@@ -237,13 +240,13 @@ export default function NarayaneeyamGame() {
         <div style={s.om}>ॐ</div>
         <h1 style={s.h1}>Śrīman Nārāyaṇīyam</h1>
         <p style={s.sub}>Quiz — All 100 Dasakams</p>
-        <div style={{background:"linear-gradient(135deg, rgba(232,148,77,0.08), rgba(155,142,196,0.06), rgba(92,184,178,0.05))",border:"1px solid rgba(255,255,255,0.06)",borderRadius:12,padding:"14px 16px",margin:"8px 0 4px",maxWidth:440}}>
-          <p style={{fontSize:12,color:"#c0b8a8",lineHeight:1.7,margin:0,textAlign:"center"}}>
+        <div style={{background:"linear-gradient(135deg, rgba(212,122,46,0.04), rgba(122,106,170,0.03), rgba(42,138,130,0.03))",border:"1px solid rgba(0,0,0,0.06)",borderRadius:12,padding:"14px 16px",margin:"8px 0 4px",maxWidth:440}}>
+          <p style={{fontSize:12,color:"#5a4a38",lineHeight:1.7,margin:0,textAlign:"center"}}>
             Composed in 1586 CE by <span style={{color:SAFFRON}}>Meppathur Narayana Bhattathiri</span> at the Guruvayur temple, the Narayaneeyam distills the 18,000 verses of the Bhagavata Purana into <span style={{color:TEAL}}>100 Dasakams</span> (groups of ten verses). Written as a prayer for healing, it journeys from the Lord's cosmic nature through all His avataras to the sweetness of Krishna's lilas — a masterpiece of devotion, philosophy, and poetry.
           </p>
         </div>
         <div style={s.statsBar}>
-          {[["Questions",total,SAFFRON,"rgba(232,148,77,0.10)","rgba(232,148,77,0.25)"],["Correct",score,TEAL,"rgba(92,184,178,0.10)","rgba(92,184,178,0.25)"],["Accuracy",acc+"%",VIOLET,"rgba(155,142,196,0.10)","rgba(155,142,196,0.25)"],["Streak",streak,LOTUS,"rgba(212,112,138,0.10)","rgba(212,112,138,0.25)"]].map(([l,v,c,bg,bd])=>(
+          {[["Questions",total,SAFFRON,"rgba(212,122,46,0.06)","rgba(212,122,46,0.15)"],["Correct",score,TEAL,"rgba(42,138,130,0.06)","rgba(42,138,130,0.15)"],["Accuracy",acc+"%",VIOLET,"rgba(122,106,170,0.06)","rgba(122,106,170,0.15)"],["Streak",streak,LOTUS,"rgba(192,80,112,0.06)","rgba(192,80,112,0.15)"]].map(([l,v,c,bg,bd])=>(
             <div key={l} style={{...s.statBox,background:bg,border:`1px solid ${bd}`}}><div style={{...s.sv,color:c}}>{v}</div><div style={{...s.sl,color:c,opacity:0.6}}>{l}</div></div>
           ))}
         </div>
@@ -252,7 +255,7 @@ export default function NarayaneeyamGame() {
           <button style={s.btnS} onClick={rand}>🎲 Random</button>
         </div>
         {hist.length>0 && <button style={s.btnS} onClick={()=>setScreen("hist")}>View History</button>}
-        {total>0 && <button style={{...s.btnS,fontSize:11,color:"#8a6a7a",border:"1px solid rgba(180,100,140,0.2)",padding:"8px 16px"}} onClick={()=>{ if(window.confirm("Reset all scores and history?")){ setScore(0);setTotal(0);setStreak(0);setDone(new Set());setHist([]); ["nm_score","nm_total","nm_streak","nm_done","nm_hist"].forEach(k=>localStorage.removeItem(k)); } }}>Reset Progress</button>}
+        {total>0 && <button style={{...s.btnS,fontSize:11,color:"#a08090",border:"1px solid rgba(160,100,130,0.2)",padding:"8px 16px"}} onClick={()=>{ if(window.confirm("Reset all scores and history?")){ setScore(0);setTotal(0);setStreak(0);setDone(new Set());setHist([]); ["nm_score","nm_total","nm_streak","nm_done","nm_hist"].forEach(k=>localStorage.removeItem(k)); } }}>Reset Progress</button>}
         <p style={s.foot}>Guruvayurappan Sharanam 🙏</p>
       </div>
     </div>
@@ -268,7 +271,7 @@ export default function NarayaneeyamGame() {
           {hist.map((h,i)=>(
             <div key={i} style={{...s.hi,borderLeft:`4px solid ${h.ok?G:"#c0392b"}`}}>
               <span style={{fontSize:10,color:G}}>Dasakam {h.n}</span>
-              <span style={{fontSize:13,color:"#d8c8b0"}}>{h.t}</span>
+              <span style={{fontSize:13,color:"#3a3028"}}>{h.t}</span>
               <span style={{fontSize:12,fontWeight:"bold",color:h.ok?G:"#e74c3c"}}>{h.ok?"✓ Correct":"✗ Wrong"}</span>
             </div>
           ))}
@@ -280,7 +283,7 @@ export default function NarayaneeyamGame() {
   // SELECT
   if (screen === "select") {
     const groupRanges = ranges.filter(r => r !== "all");
-    const groupTints = ["#c9a87c","#a8c4a0","#8ab4d0","#d4a0b0","#b8b098","#a0b8c8","#d0b890","#b0a0c8","#c4b8a0","#a8c0b0"];
+    const groupTints = ["#b8860b","#2e8b57","#3a7ec0","#c05070","#7a6a40","#2a8a82","#c87830","#7a6aaa","#8a7a30","#3a8a6a"];
     return (
     <div style={s.root}><div style={s.bg}/>
       <div style={s.wrap}>
@@ -294,11 +297,11 @@ export default function NarayaneeyamGame() {
             const tint = groupTints[ri] || G;
             return (
               <button key={r} style={s.groupBtn} onClick={()=>{setFilter(r);setScreen("group")}}>
-                <span style={{fontSize:13,fontWeight:"bold",color:"#c8b8a0"}}>{r}</span>
-                <div style={{width:"100%",height:3,borderRadius:2,background:"rgba(255,255,255,0.06)",overflow:"hidden"}}>
-                  <div style={{width:`${doneCount/group.length*100}%`,height:"100%",borderRadius:2,background:tint,opacity:0.6,transition:"width 0.3s"}}/>
+                <span style={{fontSize:13,fontWeight:"bold",color:tint}}>{r}</span>
+                <div style={{width:"100%",height:3,borderRadius:2,background:"rgba(0,0,0,0.06)",overflow:"hidden"}}>
+                  <div style={{width:`${doneCount/group.length*100}%`,height:"100%",borderRadius:2,background:tint,opacity:0.5,transition:"width 0.3s"}}/>
                 </div>
-                <span style={{fontSize:9,color:"#6a6a6a"}}>{doneCount}/{group.length}</span>
+                <span style={{fontSize:9,color:"#8a8a8a"}}>{doneCount}/{group.length}</span>
               </button>
             );
           })}
@@ -311,7 +314,7 @@ export default function NarayaneeyamGame() {
   // GROUP — shows the 10 dasakams with Sanskrit verse and meaning
   if (screen === "group" && filter !== "all") {
     const groupRanges = ranges.filter(r => r !== "all");
-    const groupTints = ["#c9a87c","#a8c4a0","#8ab4d0","#d4a0b0","#b8b098","#a0b8c8","#d0b890","#b0a0c8","#c4b8a0","#a8c0b0"];
+    const groupTints = ["#b8860b","#2e8b57","#3a7ec0","#c05070","#7a6a40","#2a8a82","#c87830","#7a6aaa","#8a7a30","#3a8a6a"];
     const ri = groupRanges.indexOf(filter);
     const tint = groupTints[ri] || G;
     const [lo,hi] = filter.split("-").map(Number);
@@ -323,14 +326,14 @@ export default function NarayaneeyamGame() {
         <p style={{...s.ptit,fontSize:20,marginBottom:16,color:tint}}>Dasakams {filter}</p>
         <div style={{display:"flex",flexDirection:"column",gap:14}}>
           {group.map(d => (
-            <div key={d.n} style={{background:PA,border:`1px solid ${BO}`,borderRadius:12,padding:"14px 16px",borderLeft:`4px solid ${tint}`,cursor:"pointer"}} onClick={()=>pick(d)}>
+            <div key={d.n} style={{background:"#fff",border:"1px solid rgba(0,0,0,0.06)",borderRadius:12,padding:"14px 16px",borderLeft:`4px solid ${tint}`,cursor:"pointer",boxShadow:"0 1px 6px rgba(0,0,0,0.04)"}} onClick={()=>pick(d)}>
               <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}>
                 <span style={{fontSize:16,fontWeight:"bold",color:tint,minWidth:28}}>{d.n}</span>
-                <span style={{fontSize:14,color:"#f0e6d0",fontWeight:"bold"}}>{d.t}</span>
-                {done.has(d.n)&&<span style={{marginLeft:"auto",color:"#8ab88a",fontSize:12}}>✓</span>}
+                <span style={{fontSize:14,color:"#2a2018",fontWeight:"bold"}}>{d.t}</span>
+                {done.has(d.n)&&<span style={{marginLeft:"auto",color:TEAL,fontSize:12}}>✓</span>}
               </div>
-              <p style={{fontSize:15,color:"#f5e8b0",lineHeight:1.9,margin:"0 0 8px",fontFamily:"serif",fontStyle:"italic"}}>{d.vs}</p>
-              <p style={{fontSize:12,color:"#b8a88a",lineHeight:1.6,margin:0}}>{d.vt.split("—")[1]?.trim() || d.vt.split("—")[0].trim()}</p>
+              <p style={{fontSize:15,color:"#6a5a40",lineHeight:1.9,margin:"0 0 8px",fontFamily:"serif",fontStyle:"italic"}}>{d.vs}</p>
+              <p style={{fontSize:12,color:"#8a7a60",lineHeight:1.6,margin:0}}>{d.vt.split("—")[1]?.trim() || d.vt.split("—")[0].trim()}</p>
             </div>
           ))}
         </div>
@@ -360,7 +363,7 @@ export default function NarayaneeyamGame() {
         {verse&&(
           <div style={s.vbox}>
             <div style={{fontSize:10,color:G,letterSpacing:1,marginBottom:7}}>✦ Key Verse {sel.kv}</div>
-            <p style={{fontSize:13,color:"#d8c8b0",lineHeight:1.8,margin:0,fontStyle:"italic"}}>{sel.vt}</p>
+            <p style={{fontSize:13,color:"#5a4a38",lineHeight:1.8,margin:0,fontStyle:"italic"}}>{sel.vt}</p>
           </div>
         )}
         <div style={s.qbox}>
@@ -386,14 +389,14 @@ export default function NarayaneeyamGame() {
             <div style={s.rbox}>
               <div style={{...s.rh,color:ans===sel.a?TEAL:SAFFRON}}>{ans===sel.a?"✨ Excellent!":"📖 Learn & Grow"}</div>
               <p style={s.exp}>{sel.exp}</p>
-              {sel.vs&&<div style={{background:"linear-gradient(135deg, rgba(232,148,77,0.10), rgba(155,142,196,0.06))",border:"1px solid rgba(232,148,77,0.2)",borderLeft:`4px solid ${SAFFRON}`,borderRadius:8,padding:"12px 14px",marginBottom:10}}>
+              {sel.vs&&<div style={{background:"linear-gradient(135deg, rgba(212,122,46,0.05), rgba(122,106,170,0.03))",border:"1px solid rgba(212,122,46,0.15)",borderLeft:`4px solid ${SAFFRON}`,borderRadius:8,padding:"12px 14px",marginBottom:10}}>
                 <div style={{fontSize:10,color:SAFFRON,letterSpacing:1,marginBottom:8}}>✦ Key Verse {sel.kv}</div>
-                <p style={{fontSize:16,color:"#f5e8c0",lineHeight:2,margin:"0 0 8px",fontFamily:"serif"}}>{sel.vs}</p>
-                <p style={{fontSize:11,color:"#a09888",lineHeight:1.6,margin:0,fontStyle:"italic"}}>{sel.vt}</p>
+                <p style={{fontSize:16,color:"#5a4020",lineHeight:2,margin:"0 0 8px",fontFamily:"serif"}}>{sel.vs}</p>
+                <p style={{fontSize:11,color:"#7a6a50",lineHeight:1.6,margin:0,fontStyle:"italic"}}>{sel.vt}</p>
               </div>}
               <div style={s.ff}>
                 <span style={{color:TEAL,fontSize:12,fontWeight:"bold"}}>💡 Insight: </span>
-                <span style={{color:"#b8b0a0",fontSize:12}}>{sel.fact}</span>
+                <span style={{color:"#5a5040",fontSize:12}}>{sel.fact}</span>
               </div>
               <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
                 <button style={s.btnP} onClick={cont}>↺ Try Again</button>
