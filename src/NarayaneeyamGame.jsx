@@ -235,7 +235,7 @@ export default function NarayaniyamGame() {
     </div>
   );
 
-  // GROUP — shows all questions for the selected dasakam range
+  // GROUP — shows dasakam headings with 3 question cards each
   if (screen === "group" && filter !== "all") {
     const groupRanges = ranges.filter(r => r !== "all");
     const groupTints = ["#b8860b","#2e8b57","#3a7ec0","#c05070","#7a6a40","#2a8a82","#c87830","#7a6aaa","#8a7a30","#3a8a6a"];
@@ -244,36 +244,41 @@ export default function NarayaniyamGame() {
     const [lo,hi] = filter.split("-").map(Number);
     const group = ALL.filter(d => d.n >= lo && d.n <= hi);
     const doneCount = group.filter(d => done.has(d.qid)).length;
+    const dasakamNums = [...new Set(group.map(d => d.n))];
     return (
     <div style={s.root}><div style={s.bg}/>
       <div style={s.wrap}>
         <button style={s.back} onClick={()=>setScreen("home")}>← Back</button>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}}>
           <p style={{...s.ptit,fontSize:20,margin:0,color:tint}}>Dasakams {filter}</p>
-          <span style={{fontSize:12,color:"#888"}}>{doneCount}/{group.length} answered</span>
+          <span style={{fontSize:12,color:"#888"}}>{doneCount}/{group.length}</span>
         </div>
-        <div style={{display:"flex",flexDirection:"column",gap:10}}>
-          {group.map((d, idx) => {
-            const isFirstOfDasakam = idx === 0 || group[idx-1].n !== d.n;
-            const qNum = d.qid.split("-")[1];
+        <div style={{display:"flex",flexDirection:"column",gap:16}}>
+          {dasakamNums.map(n => {
+            const qs = group.filter(d => d.n === n);
+            const d0 = qs[0];
+            const qsDone = qs.filter(d => done.has(d.qid)).length;
             return (
-            <div key={d.qid}>
-              {isFirstOfDasakam && (
-                <div style={{marginBottom:6,marginTop:idx>0?10:0}}>
-                  <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4}}>
-                    <span style={{fontSize:16,fontWeight:"bold",color:tint}}>{d.n}</span>
-                    <span style={{fontSize:14,color:"#f0ece4",fontWeight:"bold"}}>{d.t}</span>
+            <div key={n} style={{background:"#141414",border:"1px solid rgba(255,255,255,0.08)",borderRadius:12,padding:"14px 16px",borderLeft:`4px solid ${tint}`,boxShadow:"0 1px 6px rgba(0,0,0,0.3)"}}>
+              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+                <span style={{fontSize:16,fontWeight:"bold",color:tint,minWidth:28}}>{n}</span>
+                <span style={{fontSize:14,color:"#f0ece4",fontWeight:"bold",flex:1}}>{d0.t}</span>
+                <span style={{fontSize:11,color:qsDone===qs.length?TEAL:"#666"}}>{qsDone}/{qs.length}</span>
+              </div>
+              <div style={{display:"flex",flexDirection:"column",gap:6}}>
+                {qs.map(d => {
+                  const qNum = +d.qid.split("-")[1] + 1;
+                  const isDone = done.has(d.qid);
+                  return (
+                  <div key={d.qid} style={{background:isDone?"rgba(42,138,130,0.06)":"rgba(255,255,255,0.03)",border:`1px solid ${isDone?"rgba(42,138,130,0.25)":"rgba(255,255,255,0.06)"}`,borderRadius:8,padding:"10px 12px",cursor:"pointer"}} onClick={()=>pick(d)}>
+                    <div style={{display:"flex",alignItems:"center",gap:8}}>
+                      <span style={{fontSize:11,color:tint,fontWeight:"bold",minWidth:20}}>Q{qNum}</span>
+                      <span style={{fontSize:12,color:"#c8c0b0",flex:1}}>{d.q}</span>
+                      {isDone&&<span style={{color:TEAL,fontSize:11}}>✓</span>}
+                    </div>
                   </div>
-                  <p style={{fontSize:14,color:"#b8a888",lineHeight:1.8,margin:"0 0 2px",fontFamily:"serif",fontStyle:"italic"}}>{d.vs}</p>
-                  <p style={{fontSize:11,color:"#908878",lineHeight:1.5,margin:0}}>{d.vt}</p>
-                </div>
-              )}
-              <div style={{background:"#141414",border:`1px solid ${done.has(d.qid)?"rgba(42,138,130,0.3)":"rgba(255,255,255,0.08)"}`,borderRadius:10,padding:"12px 14px",borderLeft:`3px solid ${done.has(d.qid)?TEAL:tint}`,cursor:"pointer",marginLeft:12}} onClick={()=>pick(d)}>
-                <div style={{display:"flex",alignItems:"center",gap:8}}>
-                  <span style={{fontSize:11,color:tint,fontWeight:"bold",minWidth:18}}>Q{+qNum+1}</span>
-                  <span style={{fontSize:13,color:"#d0c8b8",flex:1}}>{d.q}</span>
-                  {done.has(d.qid)&&<span style={{color:TEAL,fontSize:12}}>✓</span>}
-                </div>
+                  );
+                })}
               </div>
             </div>
             );
