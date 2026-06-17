@@ -145,14 +145,10 @@ export default function NarayaniyamGame() {
     </div>
   );
 
-  // ABOUT + HOME (combined)
+  // ABOUT THE BOOK (screen 2)
   if (screen === "about") return (
     <div style={s.root}><div style={s.bg}/>
-      <div style={{...s.wrap,display:"flex",flexDirection:"column",alignItems:"center",gap:14,paddingTop:40}}>
-        <div style={{position:"absolute",top:16,left:16,right:16,display:"flex",justifyContent:"space-between"}}>
-          <button style={{fontSize:11,color:G,background:"transparent",border:`1px solid ${BO}`,borderRadius:8,padding:"5px 12px",cursor:"pointer",fontFamily:"Georgia,serif"}} onClick={()=>setScreen("title")}>← Back</button>
-          <button onClick={toggleFullScreen} style={{fontSize:11,color:G,background:"transparent",border:`1px solid ${BO}`,borderRadius:8,padding:"5px 12px",cursor:"pointer",fontFamily:"Georgia,serif"}}>⛶ Full Screen</button>
-        </div>
+      <div style={{...s.wrap,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",minHeight:"100vh",gap:20,paddingTop:0}}>
         <div style={{fontSize:48,lineHeight:1,color:SAFFRON}}>ॐ</div>
         <h2 style={{fontSize:24,fontWeight:"bold",textAlign:"center",color:G,margin:0}}>About the Śrīman Nārāyaṇīyam</h2>
         <div style={{background:"linear-gradient(135deg, rgba(212,122,46,0.1), rgba(122,106,170,0.06), rgba(42,138,130,0.05))",border:`1px solid ${BO}`,borderRadius:14,padding:"20px",maxWidth:480}}>
@@ -166,7 +162,26 @@ export default function NarayaniyamGame() {
             Tradition holds that when Bhaṭṭathiri completed the 100th Daśakam, the Lord of Guruvāyūr appeared before him and his disease was cured.
           </p>
         </div>
-        <button style={{...s.btnP,padding:"15px 40px",fontSize:16}} onClick={()=>setScreen("select")}>Begin the Quiz →</button>
+        <div style={{display:"flex",gap:12}}>
+          <button style={s.btnS} onClick={()=>setScreen("title")}>← Back</button>
+          <button style={{...s.btnP,padding:"15px 40px",fontSize:16}} onClick={()=>setScreen("home")}>Begin the Quiz →</button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // HOME (screen 3 — game controls)
+  if (screen === "home") return (
+    <div style={s.root}><div style={s.bg}/>
+      <div style={{...s.wrap,display:"flex",flexDirection:"column",alignItems:"center",gap:14,paddingTop:40}}>
+        <div style={{position:"absolute",top:16,left:16,right:16,display:"flex",justifyContent:"space-between"}}>
+          <button style={{fontSize:11,color:G,background:"transparent",border:`1px solid ${BO}`,borderRadius:8,padding:"5px 12px",cursor:"pointer",fontFamily:"Georgia,serif"}} onClick={()=>setScreen("about")}>← Back</button>
+          <button onClick={toggleFullScreen} style={{fontSize:11,color:G,background:"transparent",border:`1px solid ${BO}`,borderRadius:8,padding:"5px 12px",cursor:"pointer",fontFamily:"Georgia,serif"}}>⛶ Full Screen</button>
+        </div>
+        <div style={s.om}>ॐ</div>
+        <h1 style={s.h1}>Śrīman Nārāyaṇīyam</h1>
+        <p style={s.sub}>Quiz — All 100 Daśakams</p>
+        <button style={{...s.btnP,padding:"13px 36px",fontSize:15}} onClick={()=>setScreen("select")}>Choose a Daśakam →</button>
         <div style={s.statsBar}>
           {[["Questions",total,SAFFRON,"rgba(212,122,46,0.08)","rgba(212,122,46,0.2)"],["Correct",score,TEAL,"rgba(42,138,130,0.08)","rgba(42,138,130,0.2)"],["Accuracy",acc+"%",VIOLET,"rgba(122,106,170,0.08)","rgba(122,106,170,0.2)"],["Streak",streak,LOTUS,"rgba(192,80,112,0.08)","rgba(192,80,112,0.2)"]].map(([l,v,c,bg,bd])=>(
             <div key={l} style={{...s.statBox,background:bg,border:`1px solid ${bd}`}}><div style={{...s.sv,color:c}}>{v}</div><div style={{...s.sl,color:c,opacity:0.6}}>{l}</div></div>
@@ -186,7 +201,7 @@ export default function NarayaniyamGame() {
   if (screen === "hist") return (
     <div style={s.root}><div style={s.bg}/>
       <div style={s.wrap}>
-        <button style={s.back} onClick={()=>setScreen("about")}>← Back</button>
+        <button style={s.back} onClick={()=>setScreen("home")}>← Back</button>
         <p style={s.ptit}>Session History</p>
         <div style={{display:"flex",flexDirection:"column",gap:8}}>
           {hist.map((h,i)=>(
@@ -208,7 +223,7 @@ export default function NarayaniyamGame() {
     return (
     <div style={s.root}><div style={s.bg}/>
       <div style={s.wrap}>
-        <button style={s.back} onClick={()=>setScreen("about")}>← Home</button>
+        <button style={s.back} onClick={()=>setScreen("home")}>← Home</button>
         <p style={{...s.ptit,fontSize:18,marginBottom:10}}>Choose a Dasakam Group</p>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
           {groupRanges.map((r,ri) => {
