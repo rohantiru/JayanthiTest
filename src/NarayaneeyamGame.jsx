@@ -9,37 +9,37 @@ const ALL = [...D1, ...D1B, ...D2, ...D2B].flatMap(d =>
 
 // ── DASAKAM 100 — VERSE BY VERSE ─────────────────────────────────────────────
 const DASAKAM_100 = [
-{v:1,
+{v:1,title:"The Divine Radiance",
 sk:"अग्रे पश्यामि तेजो निबिडतरकलायावलीलोभनीयं\nपीयूषाप्लावितोऽहं तदनु तदुदरे दिव्यकैशोरवेषं\nतारुण्यारम्भरम्यं परमसुखरसास्वादरोमाञ्चिताङ्गै-\nर्आवीतं नारदाद्यैर्विलसदुपनिषत्सुन्दरीमण्डलैश्च ॥",
 en:"Before me I behold a radiance, enchanting with dense clusters of divine splendour. I am drenched in nectar! Within that radiance I see a divine youthful form, beautiful with the first bloom of adolescence, surrounded by Narada and other sages whose limbs thrill with supreme bliss, and by the beautiful assembly of the Upanishads personified."},
-{v:2,
+{v:2,title:"The Divine Hair & Forehead",
 sk:"नीलाभं कुञ्चिताग्रं घनममलतरं सम्यतं चारुभङ्ग्या\nरत्नोत्तंसाभिरामं वलयितमुदयच्चन्द्रकैर्बर्हपुङ्खैः ।\nसीमन्ते मौक्तिकश्रीरपि च तिलकिता भालभूमिर्ललाटे\nकस्तूरीपत्ररेखा तिलकयति भवत् लोचनानन्दलक्ष्मीम् ॥",
 en:"The hair is dark blue, curly at the tips, thick and pure, parted beautifully, adorned with gem-studded ornaments, decorated with peacock feathers that gleam like rising moons. Pearls grace the parting line, and on the forehead, a kasturi tilaka in the form of a leaf-design enhances the beauty that delights the eyes."},
-{v:3,
+{v:3,title:"The Eyes & Smile",
 sk:"हृद्यं पूर्णानुकम्पार्णवमृदुलहरीचञ्चलं भ्रूविलासै-\nरानीलस्निग्धपक्ष्मावलिपरिलसितं नेत्रयुग्मं विभो ते ।\nमन्दस्मेरप्रभापूरपरिमृदितसन्तान मौक्तिकश्रीः\nसौन्दर्यैकनिधानं तव वदनमिदं मन्दहासस्य शोभाम् ॥",
 en:"O Lord! Your pair of eyes, swimming in an ocean of overflowing compassion, playful with the dancing of eyebrows, adorned with dark, soft eyelashes — and Your face, the sole treasure-house of beauty, with the radiance of a gentle smile that outshines a stream of pearls — I behold this vision."},
-{v:4,
+{v:4,title:"The Ears, Cheeks & Nose",
 sk:"कर्णद्वन्द्वे लसन्मत्तमकरमणिकुण्डलचक्रचक्रे\nगण्डभित्तिस्तवासीदतुलकमनीयद्युतिस्ताम्रशोभा ।\nनासामौक्तिकमुक्ता मणिरचितमहामौक्तिकं ते विराज-\nत्याभिर्मुग्धस्मितश्रीमधुरिमलहरीपूरिते वक्त्रपद्मे ॥",
 en:"On both ears shine magnificent makara-shaped gem-studded earrings. Your cheeks glow with an incomparably beautiful coppery radiance. A pearl on Your nose, fashioned from precious gems, gleams upon Your lotus face that overflows with the sweet waves of an enchanting smile."},
-{v:5,
+{v:5,title:"The Arms & Chest",
 sk:"बाहुद्वन्द्वे समुज्ज्वलन्मणिवलय शोभे विचित्राङ्गुलीक-\nव्राजत्कल्पानुकल्पप्रतिनवमणि श्रेणिकापूर्वकल्पे ।\nउत्तुङ्गोरस्थलीं ते मणिमयनवशृङ्गानि माणिक्यजाला-\nन्याकल्पं वैजयन्तीरचितवनमालोपशोभामुदारम् ॥",
 en:"Your two arms shine with gem-studded bracelets and wonderful rings whose jewels rival those of the Kalpa tree. Your broad, elevated chest bears gem-crested ornaments, ruby necklaces, the Vaijayanti garland, and the forest-flower garland — all radiating magnificent splendour."},
-{v:6,
+{v:6,title:"Kaustubha & Yellow Silk",
 sk:"कौस्तुभश्रीपरीतां तव हि वपुषि मे दृष्टिरत्यन्तदीप्ता\nश्रीवत्सं चारुभासं तदधिविलसितं कोमलं वन्यमालाम् ।\nमुक्ताहारांश्च हारावलिमणिकटकान् केतकारोचनं च\nन्यस्तं तच्छ्रीविमुग्धं तव तनुविलसत्पीतचेलं दधानम् ॥",
 en:"My gaze is intensely drawn to the Kaustubha gem on Your chest, the beautiful Srivatsa mark, the delicate forest garland above it, pearl necklaces, rows of gem-studded ornaments, and ketaka flowers with saffron paste — all upon Your enchanting form draped in shimmering yellow silk."},
-{v:7,
+{v:7,title:"The Lotus Feet",
 sk:"अत्युद्दाम्रैर्मयूखैरुदयमनुभवन्नूपुरश्रीर्विदूरात्\nमञ्जीरं मञ्जुनादं तव पदयुगलं पद्मजातं दधानम् ।\nपादाब्जद्वन्द्वमेतत् प्रणमत सकलं शार्ङ्गचक्रादिसर्व-\nश्रीरूपं श्रीनिवासं तव पदकमलं नौमि नारायणं त्वाम् ॥",
 en:"Your anklets blaze with intense reddish rays, Your tinkling toe-rings make sweet music, and Your pair of lotus feet — bearing the marks of the conch, discus, and other auspicious signs — I bow to those lotus feet of Yours. O Narayana, O abode of Lakshmi, I salute You!"},
-{v:8,
+{v:8,title:"The Fruit of Hearing",
 sk:"एवं शृण्वन्ति ये ते चरितमिदमनन्तस्य विष्णोः पठन्ति\nपापैर्मुक्तास्सुपुण्या भवभयरहिता ध्यानसिद्धिं लभन्ते ।\nसर्वस्वं मे शरण्यं तव हि चरणयोर्नित्यभक्तिर्भवेन्नः\nत्वत्कारुण्ये न किञ्चित्कुशलमपि जनान्पालयत्यन्तमन्तः ॥",
 en:"Those who hear and recite these exploits of the infinite Vishnu are freed from sins, become greatly meritorious, are released from the fear of worldly existence, and attain perfection in meditation. You are my everything, O refuge! May we have eternal devotion at Your feet. Your compassion protects people from within, needing no other merit."},
-{v:9,
+{v:9,title:"Praise of the Lord of Guruvāyūr",
 sk:"एवं तावद् विधातः स्तुतिभिरभिनुतं वायुगेहे वसन्तं\nमारुत्या सूक्तिपुष्पैर्मुनिजनहृदये दीपयन्तं प्रभावम् ।\nकारुण्येनार्द्रचित्तं पवनपुरपतिं भक्तलोकैकबन्धुं\nश्रेयो वो भूयसेऽस्तु स्तवनमिदमिहापातितं सद्गुरोस्तत् ॥",
 en:"Thus praised by hymns, the Lord who dwells in the temple of Vayu, who illumines the hearts of sages with the flowers of the Marut hymns, whose heart is moist with compassion, the Lord of Guruvayur, the sole kinsman of devotees — may this praise, inspired by the grace of the Sadguru, bring you supreme good!"},
-{v:10,
+{v:10,title:"Prayer for Devotion & Healing",
 sk:"भक्तप्रेम्णा समेतो गुरुपवनपुरे साम्प्रतं संवसन् मां\nभक्तानां भक्तिपूर्णं कुरु कुरु कृपया स्वान्तचिन्तातपं मे ।\nरोगान् शोकांश्च हित्वा सकलमपि शुभं देहि मे देव विष्णो\nतुभ्यं सर्वात्मने ते विततमनुदिनं सन्नमामो नमामः ॥",
 en:"O Lord, who dwells now in Guruvayur, filled with love for Your devotees — fill me too with devotion! By Your grace, remove the burning anguish of my mind. O Vishnu, taking away all diseases and sorrows, grant me all that is auspicious. To You, the Self of all, I bow again and again, every day!"},
-{v:11,
+{v:11,title:"Āyur Ārogya Saukhyam",
 sk:"आयुरारोग्यसौख्यं प्रदिशतु भगवान् वातगेहालयो नः ।\nइति नारायणीयं संपूर्णम् ॥",
 en:"May the Lord who dwells in the temple of Vayu grant us long life, health, and happiness. Thus ends the Narayaneeyam."},
 ];
@@ -383,13 +383,14 @@ export default function NarayaniyamGame() {
           <h2 style={{fontSize:22,color:G,margin:"0 0 4px",fontWeight:"bold"}}>Dasakam 100 — Phala Shruti</h2>
           <p style={{fontSize:13,color:"#a09080",margin:0,fontStyle:"italic"}}>The Vision of Guruvāyūrappan — 11 Verses</p>
         </div>
-        <div style={{display:"flex",flexDirection:"column",gap:8}}>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
           {DASAKAM_100.map(v => (
-            <div key={v.v} style={{background:"#141414",border:`1px solid rgba(255,255,255,0.08)`,borderRadius:10,padding:"14px 16px",borderLeft:`4px solid ${SAFFRON}`,cursor:"pointer",boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}} onClick={()=>{setSelVerse(v.v);setScreen("d100verse")}}>
-              <div style={{display:"flex",alignItems:"center",gap:10}}>
-                <span style={{fontSize:14,fontWeight:"bold",color:SAFFRON,background:"rgba(212,122,46,0.1)",borderRadius:"50%",width:28,height:28,minWidth:28,display:"flex",alignItems:"center",justifyContent:"center"}}>{v.v}</span>
-                <span style={{fontSize:13,color:"#d0c8b8",flex:1,lineHeight:1.5}}>{v.sk.split("\n")[0].slice(0,60)}…</span>
+            <div key={v.v} style={{background:"#141414",border:`1px solid rgba(255,255,255,0.08)`,borderRadius:10,padding:"14px",borderLeft:`4px solid ${SAFFRON}`,cursor:"pointer",boxShadow:"0 1px 4px rgba(0,0,0,0.2)",display:"flex",flexDirection:"column",gap:6}} onClick={()=>{setSelVerse(v.v);setScreen("d100verse")}}>
+              <div style={{display:"flex",alignItems:"center",gap:8}}>
+                <span style={{fontSize:14,fontWeight:"bold",color:SAFFRON,background:"rgba(212,122,46,0.1)",borderRadius:"50%",width:26,height:26,minWidth:26,display:"flex",alignItems:"center",justifyContent:"center"}}>{v.v}</span>
+                <span style={{fontSize:13,color:"#f0ece4",fontWeight:"bold"}}>{v.title}</span>
               </div>
+              <p style={{fontSize:11,color:"#908878",lineHeight:1.4,margin:0}}>{v.sk.split("\n")[0].slice(0,45)}…</p>
             </div>
           ))}
         </div>
