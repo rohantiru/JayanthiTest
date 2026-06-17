@@ -141,11 +141,11 @@ export default function NarayaniyamGame() {
         <h1 style={{fontSize:36,fontWeight:"bold",textAlign:"center",color:G,margin:0,lineHeight:1.3}}>Śrīman Nārāyaṇīyam</h1>
         <p style={{fontSize:16,color:"#b8a888",textAlign:"center",margin:0,fontStyle:"italic"}}>The Quintessence of Śrīmad Bhāgavatam</p>
         <div style={{background:"rgba(212,122,46,0.06)",border:`1px solid ${BO}`,borderRadius:12,padding:"16px 20px",maxWidth:480,marginTop:8}}>
-          <p style={{fontSize:18,color:"#e8d8b0",lineHeight:2.2,margin:0,textAlign:"center",fontFamily:"serif"}}>
-            सान्द्रानन्दावबोधात्मकमनुपमितं कालदेशावधिभ्यां{"\n"}
-            निर्मुक्तं नित्यमुक्तं निगमशतसहस्रेण निर्भास्यमानम्।{"\n"}
-            अस्पष्टं दृष्टमात्रे पुनरुरुपुरुषार्थात्मकं ब्रह्म तत्त्वं{"\n"}
-            तत्तावद्भाति साक्षाद् गुरुपवनपुरे हन्त भाग्यं जनानाम्॥
+          <p style={{fontSize:16,color:"#e8d8b0",lineHeight:2.2,margin:0,textAlign:"center",fontFamily:"serif"}}>
+            सान्द्रानन्दावबोधात्मकमनुपमितं कालदेशावधिभ्यां<br/>
+            निर्मुक्तं नित्यमुक्तं निगमशतसहस्रेण निर्भास्यमानम् ।<br/>
+            अस्पष्टं दृष्टमात्रे पुनरुरुपुरुषार्थात्मकं ब्रह्म तत्त्वं<br/>
+            तत्तावद्भाति साक्षाद् गुरुपवनपुरे हन्त भाग्यं जनानाम् ॥
           </p>
         </div>
         <button style={{...s.btnP,marginTop:12,padding:"15px 40px",fontSize:16}} onClick={()=>setScreen("about")}>Continue →</button>
