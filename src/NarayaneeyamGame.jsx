@@ -325,7 +325,7 @@ export default function NarayaniyamGame() {
     <div style={s.root}><div style={s.bg}/>
       <div style={s.wrap}>
         <div style={s.hdr}>
-          <button style={s.back} onClick={()=>setScreen("home")}>← Home</button>
+          <button style={s.back} onClick={()=>selDasakam?setScreen("dasakam"):setScreen("home")}>← Back</button>
           <div style={{display:"flex",gap:8,alignItems:"center"}}>
             <div style={s.chip}>🔥 {streak} | ✓ {score}/{total}</div>
 
