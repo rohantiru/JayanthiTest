@@ -3,7 +3,9 @@ import { D1, D1B, D2, D2B } from "./data/dasakams.js";
 import guruvayurImg from "./guruvayur-krishna.jpg";
 
 // ── DATA ──────────────────────────────────────────────────────────────────────
-const ALL = [...D1, ...D1B, ...D2, ...D2B];
+const ALL = [...D1, ...D1B, ...D2, ...D2B].flatMap(d =>
+  (d.qs || []).map((q, qi) => ({ ...d, ...q, qid: `${d.n}-${qi}`, qs: undefined }))
+);
 
 // ── STYLES ────────────────────────────────────────────────────────────────────
 const G = "#d4a844", DG = "#b8922e", BG = "#0a0a0a";
@@ -100,19 +102,16 @@ export default function NarayaniyamGame() {
   const [qKey, setQKey] = useState(0);
 
   function pick(d) {
-    const questions = d.qs || [{q:d.q,o:d.o,a:d.a,exp:d.exp,fact:d.fact}];
-    const qi = Math.floor(Math.random() * questions.length);
-    const question = questions[qi];
-    const correctText = question.o[question.a];
-    const shuffled = [...question.o].sort(() => Math.random() - 0.5);
+    const correctText = d.o[d.a];
+    const shuffled = [...d.o].sort(() => Math.random() - 0.5);
     setAns(null);
     setVerse(false);
-    setSel({ ...d, ...question, o: shuffled, a: shuffled.indexOf(correctText) });
+    setSel({ ...d, o: shuffled, a: shuffled.indexOf(correctText) });
     setQKey(k => k + 1);
     setScreen("play");
   }
   function rand() { pick(ALL[Math.floor(Math.random()*ALL.length)]); }
-  function next() { const i = ALL.findIndex(x=>x.n===sel.n); pick(ALL[(i+1)%ALL.length]); }
+  function next() { const i = ALL.findIndex(x=>x.qid===sel.qid); pick(ALL[(i+1)%ALL.length]); }
   function cont() { pick(sel); }
 
   function choose(i) {
@@ -122,8 +121,8 @@ export default function NarayaniyamGame() {
     const newScore = score + (ok ? 1 : 0);
     const newTotal = total + 1;
     const newStreak = ok ? streak + 1 : 0;
-    const newDone = ok ? new Set([...done, sel.n]) : done;
-    const newHist = [{n:sel.n,t:sel.t,ok}, ...hist].slice(0, 100);
+    const newDone = ok ? new Set([...done, sel.qid]) : done;
+    const newHist = [{n:sel.n,t:sel.t,qid:sel.qid,ok}, ...hist].slice(0, 100);
     setScore(newScore); setTotal(newTotal); setStreak(newStreak);
     setDone(newDone); setHist(newHist);
     save("nm_score", newScore); save("nm_total", newTotal);
@@ -188,7 +187,7 @@ export default function NarayaniyamGame() {
           {groupRanges.map((r,ri) => {
             const [lo,hi] = r.split("-").map(Number);
             const group = ALL.filter(d => d.n >= lo && d.n <= hi);
-            const doneCount = group.filter(d => done.has(d.n)).length;
+            const doneCount = group.filter(d => done.has(d.qid)).length;
             const tint = groupTints[ri] || G;
             return (
               <button key={r} style={s.groupBtn} onClick={()=>{setFilter(r);setScreen("group")}}>
@@ -236,7 +235,7 @@ export default function NarayaniyamGame() {
     </div>
   );
 
-  // GROUP — shows the 10 dasakams with Sanskrit verse and meaning
+  // GROUP — shows all questions for the selected dasakam range
   if (screen === "group" && filter !== "all") {
     const groupRanges = ranges.filter(r => r !== "all");
     const groupTints = ["#b8860b","#2e8b57","#3a7ec0","#c05070","#7a6a40","#2a8a82","#c87830","#7a6aaa","#8a7a30","#3a8a6a"];
@@ -244,23 +243,41 @@ export default function NarayaniyamGame() {
     const tint = groupTints[ri] || G;
     const [lo,hi] = filter.split("-").map(Number);
     const group = ALL.filter(d => d.n >= lo && d.n <= hi);
+    const doneCount = group.filter(d => done.has(d.qid)).length;
     return (
     <div style={s.root}><div style={s.bg}/>
       <div style={s.wrap}>
         <button style={s.back} onClick={()=>setScreen("home")}>← Back</button>
-        <p style={{...s.ptit,fontSize:20,marginBottom:16,color:tint}}>Dasakams {filter}</p>
-        <div style={{display:"flex",flexDirection:"column",gap:14}}>
-          {group.map(d => (
-            <div key={d.n} style={{background:"#141414",border:"1px solid rgba(255,255,255,0.08)",borderRadius:12,padding:"14px 16px",borderLeft:`4px solid ${tint}`,cursor:"pointer",boxShadow:"0 1px 6px rgba(0,0,0,0.3)"}} onClick={()=>pick(d)}>
-              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}>
-                <span style={{fontSize:16,fontWeight:"bold",color:tint,minWidth:28}}>{d.n}</span>
-                <span style={{fontSize:14,color:"#f0ece4",fontWeight:"bold"}}>{d.t}</span>
-                {done.has(d.n)&&<span style={{marginLeft:"auto",color:TEAL,fontSize:12}}>✓</span>}
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}}>
+          <p style={{...s.ptit,fontSize:20,margin:0,color:tint}}>Dasakams {filter}</p>
+          <span style={{fontSize:12,color:"#888"}}>{doneCount}/{group.length} answered</span>
+        </div>
+        <div style={{display:"flex",flexDirection:"column",gap:10}}>
+          {group.map((d, idx) => {
+            const isFirstOfDasakam = idx === 0 || group[idx-1].n !== d.n;
+            const qNum = d.qid.split("-")[1];
+            return (
+            <div key={d.qid}>
+              {isFirstOfDasakam && (
+                <div style={{marginBottom:6,marginTop:idx>0?10:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4}}>
+                    <span style={{fontSize:16,fontWeight:"bold",color:tint}}>{d.n}</span>
+                    <span style={{fontSize:14,color:"#f0ece4",fontWeight:"bold"}}>{d.t}</span>
+                  </div>
+                  <p style={{fontSize:14,color:"#b8a888",lineHeight:1.8,margin:"0 0 2px",fontFamily:"serif",fontStyle:"italic"}}>{d.vs}</p>
+                  <p style={{fontSize:11,color:"#908878",lineHeight:1.5,margin:0}}>{d.vt}</p>
+                </div>
+              )}
+              <div style={{background:"#141414",border:`1px solid ${done.has(d.qid)?"rgba(42,138,130,0.3)":"rgba(255,255,255,0.08)"}`,borderRadius:10,padding:"12px 14px",borderLeft:`3px solid ${done.has(d.qid)?TEAL:tint}`,cursor:"pointer",marginLeft:12}} onClick={()=>pick(d)}>
+                <div style={{display:"flex",alignItems:"center",gap:8}}>
+                  <span style={{fontSize:11,color:tint,fontWeight:"bold",minWidth:18}}>Q{+qNum+1}</span>
+                  <span style={{fontSize:13,color:"#d0c8b8",flex:1}}>{d.q}</span>
+                  {done.has(d.qid)&&<span style={{color:TEAL,fontSize:12}}>✓</span>}
+                </div>
               </div>
-              <p style={{fontSize:15,color:"#b8a888",lineHeight:1.9,margin:"0 0 8px",fontFamily:"serif",fontStyle:"italic"}}>{d.vs}</p>
-              <p style={{fontSize:12,color:"#b0a888",lineHeight:1.6,margin:0}}>{d.vt.split("—")[1]?.trim() || d.vt.split("—")[0].trim()}</p>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
