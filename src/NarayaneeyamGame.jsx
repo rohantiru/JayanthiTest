@@ -75,6 +75,7 @@ export default function NarayaniyamGame() {
   const [done, setDone] = useState(() => new Set(load("nm_done", [])));
   const [hist, setHist] = useState(() => load("nm_hist", []));
   const [filter, setFilter] = useState("all");
+  const [selDasakam, setSelDasakam] = useState(null);
   const [search, setSearch] = useState("");
   const [verse, setVerse] = useState(false);
   const [qIdx, setQIdx] = useState(0);
@@ -235,7 +236,7 @@ export default function NarayaniyamGame() {
     </div>
   );
 
-  // GROUP — shows dasakam headings with 3 question cards each
+  // GROUP — shows 10 dasakams with title and key verse (clickable)
   if (screen === "group" && filter !== "all") {
     const groupRanges = ranges.filter(r => r !== "all");
     const groupTints = ["#b8860b","#2e8b57","#3a7ec0","#c05070","#7a6a40","#2a8a82","#c87830","#7a6aaa","#8a7a30","#3a8a6a"];
@@ -253,32 +254,62 @@ export default function NarayaniyamGame() {
           <p style={{...s.ptit,fontSize:20,margin:0,color:tint}}>Dasakams {filter}</p>
           <span style={{fontSize:12,color:"#888"}}>{doneCount}/{group.length}</span>
         </div>
-        <div style={{display:"flex",flexDirection:"column",gap:16}}>
+        <div style={{display:"flex",flexDirection:"column",gap:14}}>
           {dasakamNums.map(n => {
             const qs = group.filter(d => d.n === n);
             const d0 = qs[0];
             const qsDone = qs.filter(d => done.has(d.qid)).length;
             return (
-            <div key={n} style={{background:"#141414",border:"1px solid rgba(255,255,255,0.08)",borderRadius:12,padding:"14px 16px",borderLeft:`4px solid ${tint}`,boxShadow:"0 1px 6px rgba(0,0,0,0.3)"}}>
-              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+            <div key={n} style={{background:"#141414",border:"1px solid rgba(255,255,255,0.08)",borderRadius:12,padding:"14px 16px",borderLeft:`4px solid ${tint}`,cursor:"pointer",boxShadow:"0 1px 6px rgba(0,0,0,0.3)"}} onClick={()=>{setSelDasakam(n);setScreen("dasakam")}}>
+              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}>
                 <span style={{fontSize:16,fontWeight:"bold",color:tint,minWidth:28}}>{n}</span>
                 <span style={{fontSize:14,color:"#f0ece4",fontWeight:"bold",flex:1}}>{d0.t}</span>
-                <span style={{fontSize:11,color:qsDone===qs.length?TEAL:"#666"}}>{qsDone}/{qs.length}</span>
+                {qsDone===qs.length?<span style={{color:TEAL,fontSize:12}}>✓</span>:<span style={{fontSize:11,color:"#666"}}>{qsDone}/{qs.length}</span>}
               </div>
-              <div style={{display:"flex",flexDirection:"column",gap:6}}>
-                {qs.map(d => {
-                  const qNum = +d.qid.split("-")[1] + 1;
-                  const isDone = done.has(d.qid);
-                  return (
-                  <div key={d.qid} style={{background:isDone?"rgba(42,138,130,0.06)":"rgba(255,255,255,0.03)",border:`1px solid ${isDone?"rgba(42,138,130,0.25)":"rgba(255,255,255,0.06)"}`,borderRadius:8,padding:"10px 12px",cursor:"pointer"}} onClick={()=>pick(d)}>
-                    <div style={{display:"flex",alignItems:"center",gap:8}}>
-                      <span style={{fontSize:11,color:tint,fontWeight:"bold",minWidth:20}}>Q{qNum}</span>
-                      <span style={{fontSize:12,color:"#c8c0b0",flex:1}}>{d.q}</span>
-                      {isDone&&<span style={{color:TEAL,fontSize:11}}>✓</span>}
-                    </div>
-                  </div>
-                  );
-                })}
+              <p style={{fontSize:15,color:"#b8a888",lineHeight:1.9,margin:"0 0 8px",fontFamily:"serif",fontStyle:"italic"}}>{d0.vs}</p>
+              <p style={{fontSize:12,color:"#908878",lineHeight:1.6,margin:0}}>{d0.vt}</p>
+            </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+    );
+  }
+
+  // DASAKAM — shows 3 question cards for the selected dasakam
+  if (screen === "dasakam" && selDasakam) {
+    const groupRanges = ranges.filter(r => r !== "all");
+    const groupTints = ["#b8860b","#2e8b57","#3a7ec0","#c05070","#7a6a40","#2a8a82","#c87830","#7a6aaa","#8a7a30","#3a8a6a"];
+    const ri = groupRanges.indexOf(filter);
+    const tint = groupTints[ri] || G;
+    const qs = ALL.filter(d => d.n === selDasakam);
+    const d0 = qs[0];
+    if (!d0) return null;
+    const qsDone = qs.filter(d => done.has(d.qid)).length;
+    return (
+    <div style={s.root}><div style={s.bg}/>
+      <div style={s.wrap}>
+        <button style={s.back} onClick={()=>setScreen("group")}>← Back</button>
+        <div style={{background:"linear-gradient(135deg, rgba(212,122,46,0.1), rgba(122,106,170,0.06))",border:`1px solid ${BO}`,borderRadius:12,padding:"16px",marginBottom:16}}>
+          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+            <span style={{fontSize:20,fontWeight:"bold",color:tint}}>{d0.n}</span>
+            <span style={{fontSize:16,color:"#f0ece4",fontWeight:"bold",flex:1}}>{d0.t}</span>
+            <span style={{fontSize:12,color:qsDone===qs.length?TEAL:"#888"}}>{qsDone}/{qs.length}</span>
+          </div>
+          <p style={{fontSize:16,color:"#c8b898",lineHeight:1.9,margin:"0 0 10px",fontFamily:"serif",fontStyle:"italic"}}>{d0.vs}</p>
+          <p style={{fontSize:13,color:"#a09080",lineHeight:1.7,margin:0}}>{d0.vt}</p>
+        </div>
+        <div style={{display:"flex",flexDirection:"column",gap:8}}>
+          {qs.map(d => {
+            const qNum = +d.qid.split("-")[1] + 1;
+            const isDone = done.has(d.qid);
+            return (
+            <div key={d.qid} style={{background:isDone?"rgba(42,138,130,0.06)":"#141414",border:`1px solid ${isDone?"rgba(42,138,130,0.3)":"rgba(255,255,255,0.08)"}`,borderRadius:10,padding:"14px 16px",borderLeft:`3px solid ${isDone?TEAL:tint}`,cursor:"pointer",boxShadow:"0 1px 4px rgba(0,0,0,0.2)"}} onClick={()=>pick(d)}>
+              <div style={{display:"flex",alignItems:"center",gap:10}}>
+                <span style={{fontSize:13,color:tint,fontWeight:"bold",minWidth:24}}>Q{qNum}</span>
+                <span style={{fontSize:13,color:"#d0c8b8",flex:1,lineHeight:1.5}}>{d.q}</span>
+                {isDone&&<span style={{color:TEAL,fontSize:13}}>✓</span>}
               </div>
             </div>
             );
