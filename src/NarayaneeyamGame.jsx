@@ -262,20 +262,17 @@ export default function NarayaniyamGame() {
           <p style={{...s.ptit,fontSize:20,margin:0,color:tint}}>Dasakams {filter}</p>
           <span style={{fontSize:12,color:"#888"}}>{doneCount}/{group.length}</span>
         </div>
-        <div style={{display:"flex",flexDirection:"column",gap:14}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(5, 1fr)",gap:8}}>
           {dasakamNums.map(n => {
             const qs = group.filter(d => d.n === n);
             const d0 = qs[0];
             const qsDone = qs.filter(d => done.has(d.qid)).length;
+            const allDone = qsDone === qs.length;
             return (
-            <div key={n} style={{background:"#141414",border:"1px solid rgba(255,255,255,0.08)",borderRadius:12,padding:"14px 16px",borderLeft:`4px solid ${tint}`,cursor:"pointer",boxShadow:"0 1px 6px rgba(0,0,0,0.3)"}} onClick={()=>{setSelDasakam(n);setScreen("dasakam")}}>
-              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}>
-                <span style={{fontSize:16,fontWeight:"bold",color:tint,minWidth:28}}>{n}</span>
-                <span style={{fontSize:14,color:"#f0ece4",fontWeight:"bold",flex:1}}>{d0.t}</span>
-                {qsDone===qs.length?<span style={{color:TEAL,fontSize:12}}>✓</span>:<span style={{fontSize:11,color:"#666"}}>{qsDone}/{qs.length}</span>}
-              </div>
-              <p style={{fontSize:15,color:"#b8a888",lineHeight:1.9,margin:"0 0 8px",fontFamily:"serif",fontStyle:"italic"}}>{d0.vs}</p>
-              <p style={{fontSize:12,color:"#908878",lineHeight:1.6,margin:0}}>{d0.vt}</p>
+            <div key={n} style={{background:allDone?"rgba(42,138,130,0.08)":"#141414",border:`1px solid ${allDone?"rgba(42,138,130,0.3)":"rgba(255,255,255,0.08)"}`,borderRadius:10,padding:"12px 8px",cursor:"pointer",boxShadow:"0 1px 4px rgba(0,0,0,0.3)",display:"flex",flexDirection:"column",alignItems:"center",gap:6,textAlign:"center"}} onClick={()=>{setSelDasakam(n);setScreen("dasakam")}}>
+              <span style={{fontSize:20,fontWeight:"bold",color:tint}}>{n}</span>
+              <span style={{fontSize:11,color:"#d0c8b8",lineHeight:1.3}}>{d0.t}</span>
+              <span style={{fontSize:10,color:allDone?TEAL:"#666"}}>{allDone?"✓":qsDone+"/"+qs.length}</span>
             </div>
             );
           })}
