@@ -275,24 +275,20 @@ export default function NarayaneeyamGame() {
   if (screen === "select") {
     const groupRanges = ranges.filter(r => r !== "all");
     const groupTints = ["#c9a87c","#a8c4a0","#8ab4d0","#d4a0b0","#b8b098","#a0b8c8","#d0b890","#b0a0c8","#c4b8a0","#a8c0b0"];
-    const searchResults = search ? ALL.filter(d =>
-      d.t.toLowerCase().includes(search.toLowerCase()) || String(d.n).includes(search)
-    ) : [];
     return (
     <div style={s.root}><div style={s.bg}/>
       <div style={s.wrap}>
         <button style={s.back} onClick={()=>setScreen("home")}>← Home</button>
-        <p style={{...s.ptit,fontSize:18,marginBottom:10}}>Choose a Dasakam</p>
+        <p style={{...s.ptit,fontSize:18,marginBottom:10}}>Choose a Dasakam Group</p>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
           {groupRanges.map((r,ri) => {
             const [lo,hi] = r.split("-").map(Number);
-            const isOpen = filter === r;
             const group = ALL.filter(d => d.n >= lo && d.n <= hi);
             const doneCount = group.filter(d => done.has(d.n)).length;
             const tint = groupTints[ri] || G;
             return (
-              <button key={r} style={{...s.groupBtn,...(isOpen?{...s.groupBtnOpen,borderColor:tint,background:`${tint}15`}:{})}} onClick={()=>setFilter(isOpen?"all":r)}>
-                <span style={{fontSize:13,fontWeight:"bold",color:isOpen?tint:"#c8b8a0"}}>{r}</span>
+              <button key={r} style={s.groupBtn} onClick={()=>{setFilter(r);setScreen("group")}}>
+                <span style={{fontSize:13,fontWeight:"bold",color:"#c8b8a0"}}>{r}</span>
                 <div style={{width:"100%",height:3,borderRadius:2,background:"rgba(255,255,255,0.06)",overflow:"hidden"}}>
                   <div style={{width:`${doneCount/group.length*100}%`,height:"100%",borderRadius:2,background:tint,opacity:0.6,transition:"width 0.3s"}}/>
                 </div>
@@ -301,46 +297,36 @@ export default function NarayaneeyamGame() {
             );
           })}
         </div>
-        {filter !== "all" && (() => {
-          const [lo,hi] = filter.split("-").map(Number);
-          const group = ALL.filter(d => d.n >= lo && d.n <= hi);
-          const ri = groupRanges.indexOf(filter);
-          const tint = groupTints[ri] || G;
-          return (
-            <div style={{marginTop:12,display:"flex",flexDirection:"column",gap:5}}>
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}}>
-                <span style={{fontSize:13,color:tint,fontWeight:"bold"}}>Dasakams {filter}</span>
-                <button onClick={()=>setFilter("all")} style={{background:"none",border:"none",color:"#6a6a6a",fontSize:11,cursor:"pointer",fontFamily:"Georgia,serif"}}>✕ close</button>
+      </div>
+    </div>
+    );
+  }
+
+  // GROUP — shows the 10 dasakams with Sanskrit verse and meaning
+  if (screen === "group" && filter !== "all") {
+    const groupRanges = ranges.filter(r => r !== "all");
+    const groupTints = ["#c9a87c","#a8c4a0","#8ab4d0","#d4a0b0","#b8b098","#a0b8c8","#d0b890","#b0a0c8","#c4b8a0","#a8c0b0"];
+    const ri = groupRanges.indexOf(filter);
+    const tint = groupTints[ri] || G;
+    const [lo,hi] = filter.split("-").map(Number);
+    const group = ALL.filter(d => d.n >= lo && d.n <= hi);
+    return (
+    <div style={s.root}><div style={s.bg}/>
+      <div style={s.wrap}>
+        <button style={s.back} onClick={()=>setScreen("select")}>← Back</button>
+        <p style={{...s.ptit,fontSize:20,marginBottom:16,color:tint}}>Dasakams {filter}</p>
+        <div style={{display:"flex",flexDirection:"column",gap:14}}>
+          {group.map(d => (
+            <div key={d.n} style={{background:PA,border:`1px solid ${BO}`,borderRadius:12,padding:"14px 16px",borderLeft:`4px solid ${tint}`,cursor:"pointer"}} onClick={()=>pick(d)}>
+              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:8}}>
+                <span style={{fontSize:16,fontWeight:"bold",color:tint,minWidth:28}}>{d.n}</span>
+                <span style={{fontSize:14,color:"#f0e6d0",fontWeight:"bold"}}>{d.t}</span>
+                {done.has(d.n)&&<span style={{marginLeft:"auto",color:"#8ab88a",fontSize:12}}>✓</span>}
               </div>
-              {group.map(d => (
-                <button key={d.n} style={{...s.listCard,...(done.has(d.n)?{...s.listCardDone,borderLeftColor:`${tint}40`}:{}),borderLeft:`3px solid ${done.has(d.n)?tint:"rgba(255,255,255,0.06)"}`}} onClick={()=>pick(d)}>
-                  <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:2}}>
-                    <span style={{fontSize:13,fontWeight:"bold",color:tint,minWidth:22}}>{d.n}</span>
-                    <span style={{fontSize:12,color:"#d8d0c0"}}>{d.t}</span>
-                    {done.has(d.n)&&<span style={{marginLeft:"auto",color:"#8ab88a",fontSize:10}}>✓</span>}
-                  </div>
-                  <p style={{fontSize:10,color:"#706858",lineHeight:1.4,margin:"0 0 0 30px",overflow:"hidden",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>{d.vt.split("—")[1]?.trim() || d.vt.split("—")[0].trim()}</p>
-                </button>
-              ))}
+              <p style={{fontSize:15,color:"#f5e8b0",lineHeight:1.9,margin:"0 0 8px",fontFamily:"serif",fontStyle:"italic"}}>{d.vs}</p>
+              <p style={{fontSize:12,color:"#b8a88a",lineHeight:1.6,margin:0}}>{d.vt.split("—")[1]?.trim() || d.vt.split("—")[0].trim()}</p>
             </div>
-          );
-        })()}
-        <div style={{marginTop:18,borderTop:"1px solid rgba(255,255,255,0.05)",paddingTop:14}}>
-          <input style={{...s.inp,fontSize:12,padding:"8px 12px",background:"rgba(255,255,255,0.03)",borderColor:"rgba(255,255,255,0.08)"}} placeholder="Search by name or number..." value={search} onChange={e=>setSearch(e.target.value)}/>
-          {search && (
-            <div style={{display:"flex",flexDirection:"column",gap:5}}>
-              {searchResults.length === 0 && <p style={{fontSize:11,color:"#5a5a5a",textAlign:"center"}}>No results</p>}
-              {searchResults.map(d => (
-                <button key={d.n} style={s.listCard} onClick={()=>pick(d)}>
-                  <div style={{display:"flex",alignItems:"center",gap:8}}>
-                    <span style={{fontSize:13,fontWeight:"bold",color:"#c9a87c",minWidth:22}}>{d.n}</span>
-                    <span style={{fontSize:12,color:"#d8d0c0"}}>{d.t}</span>
-                    {done.has(d.n)&&<span style={{marginLeft:"auto",color:"#8ab88a",fontSize:10}}>✓</span>}
-                  </div>
-                </button>
-              ))}
-            </div>
-          )}
+          ))}
         </div>
       </div>
     </div>
