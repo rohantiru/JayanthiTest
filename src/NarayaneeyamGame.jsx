@@ -97,14 +97,19 @@ export default function NarayaniyamGame() {
     return true;
   });
 
+  const [qKey, setQKey] = useState(0);
+
   function pick(d) {
     const questions = d.qs || [{q:d.q,o:d.o,a:d.a,exp:d.exp,fact:d.fact}];
     const qi = Math.floor(Math.random() * questions.length);
     const question = questions[qi];
     const correctText = question.o[question.a];
     const shuffled = [...question.o].sort(() => Math.random() - 0.5);
+    setAns(null);
+    setVerse(false);
     setSel({ ...d, ...question, o: shuffled, a: shuffled.indexOf(correctText) });
-    setAns(null); setVerse(false); setScreen("play");
+    setQKey(k => k + 1);
+    setScreen("play");
   }
   function rand() { pick(ALL[Math.floor(Math.random()*ALL.length)]); }
   function next() { const i = ALL.findIndex(x=>x.n===sel.n); pick(ALL[(i+1)%ALL.length]); }
@@ -282,7 +287,7 @@ export default function NarayaniyamGame() {
             <p style={{fontSize:13,color:"#c0b8a0",lineHeight:1.8,margin:0,fontStyle:"italic"}}>{sel.vt}</p>
           </div>
         )}
-        <div style={s.qbox}>
+        <div key={qKey} style={s.qbox}>
           <p style={s.qt}>{sel.q}</p>
           <div style={s.opts}>
             {sel.o.map((opt,i)=>{
