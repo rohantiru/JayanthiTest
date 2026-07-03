@@ -30,7 +30,7 @@ const D1 = [
  vt:"Grant me sufficient health so that I may worship You through the eight-limbed yoga. All paths of yoga ultimately lead to the Lord.",
  vs:"कल्यतां मम कुरुष्व तावतीं कल्यते भवदुपासनं यया।",
  qs:[
- {q:"How many limbs does Ashtanga Yoga have?",o:["Four","Six","Eight","Ten"],a:2,exp:"Ashtanga Yoga has eight limbs: Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, and Samadhi. All paths of yoga lead to devotion to the Lord."},
+ {q:"How many limbs does Ashtanga Yoga have?",o:["Four","Six","Eight","Ten"],a:2,exp:"Ashtanga Yoga has eight limbs: Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, and Samadhi."},
  {q:"According to Dasakam 4, what is the final goal of all yoga practice?",o:["Physical fitness","Supernatural powers (siddhis)","Devotion to and realization of the Lord","Control over the elements"],a:2,exp:"The ultimate goal of yoga is devotion to and realization of the Lord."},
  {q:"What is the eighth and final limb of Ashtanga Yoga described in Dasakam 4?",o:["Dharana (concentration)","Dhyana (meditation)","Samadhi (complete absorption)","Pratyahara (sense withdrawal)"],a:2,exp:"Samadhi is the eighth and final limb where the mind merges with the object of meditation."}
  ]},
@@ -82,8 +82,6 @@ const D1 = [
  {q:"What was Narada's occupation in his previous birth before becoming a divine sage?",o:["A king who renounced his throne","The son of a maidservant who served visiting sages","A warrior who renounced battle","A merchant"],a:1,exp:"Narada was the son of a maidservant; through service to sages, he attained liberation."},
  {q:"What did Narada experience when he first meditated on the Lord in his previous birth?",o:["Nothing happened despite years of effort","A brief divine vision that appeared and then vanished, leaving him longing for more","Immediate enlightenment","A voice commanding him to wander"],a:1,exp:"Narada experienced a brief divine vision that awakened eternal longing for God-realization."}
  ]},
-
-// --- UPDATED Dasakams 11–20: rewritten to focus on Narayaneeyam (questions derived from the Daśakams' vt/vs)
 {n:11,t:"Prelude to the First Incarnation",kv:"11.5",
  vt:"The sages Sanaka and others visited Vaikuṇṭha but were stopped by gatekeepers Jaya and Vijaya — whose curse to be born as demons set in motion the Lord's avatāra cycle.",
  vs:"क्रमेण सर्गे परिवर्धमाने कदापि दिव्याः सनकादयस्ते। भवद्विलोकाय विकुण्ठमागतः",
@@ -164,7 +162,6 @@ const D1 = [
  {q:"What did the Lord promise King Nābhi in Dasakam 20?",o:["To give him vast riches","To be born as his son Ṛṣabha","To destroy his line","To grant immortality"],a:1,exp:"The Lord promises to incarnate as Ṛṣabha, Nābhi's son."},
  {q:"What ritual was King Nābhi performing when he received the vision in Dasakam 20?",o:["A yajña (sacrificial ritual)","A marriage ceremony","A coronation","A harvest festival"],a:0,exp:"The yajña (sacred ritual) was the occasion for the divine vision."}
  ]},
-
 {n:21,t:"Worship in Different Continents",kv:"21.1",
  vt:"The poet seeks refuge in the Lord who resides as Sankarshana in the Ilaavrata region, worshipped by Shiva with sacred hymns.",
  vs:"मध्योद्भवे भुव इलावृतनाम्नि वर्षे गौरीप्रधानवनिताजनमात्रभाजि। शर्व",
@@ -180,7 +177,7 @@ const D1 = [
  {q:"What happened to Daksha's head after Sati's self-immolation?",o:["He was imprisoned","Veerabhadra cut off his head; later he was revived with a goat's head","He was cursed to be reborn","He ascended to heaven"],a:1,exp:"Veerabhadra beheaded Daksha; he was later revived with a goat's head."},
  {q:"Why did Sati go to Daksha's yajna against Shiva's wishes?",o:["She was commanded by Brahma","She hoped to change her father's mind about Shiva, believing a daughter need not be invited to her father's sacrifice","She wanted to gain spiritual power","She was forced by her mother"],a:1,exp:"Sati went hoping to convince her father, a decision that led to her self-immolation."},
  {q:"Who restored order after Veerabhadra destroyed Daksha's yajna?",o:["Brahma alone","Vishnu — He pacified Shiva and revived Daksha with a goat's head to complete the sacrifice","Shiva calmed himself","The sages prayed for peace"],a:1,exp:"Vishnu intervened to restore cosmic order and revive Daksha."}
- ]},
+ ]}
 ];
 
 const D1B = [
@@ -199,13 +196,10 @@ const D1B = [
  {q:"What did the fish instruct King Satyavrata (Manu) to collect on his boat?",o:["Gold and jewels for the next age","Seeds of all plants, pairs of all animals, and the seven sages","Only his family members","Weapons for war"],a:1,exp:"The divine fish instructed Manu to preserve seeds and all living beings."},
  {q:"How did the Matsya avatara begin — how did the Lord first appear to Manu?",o:["As a massive whale in the ocean","As a tiny fish in Manu's cupped hands that kept growing larger and larger, revealing divinity","As an old sage","As a divine voice"],a:1,exp:"The Lord appeared as a small fish that grew infinitely larger, revealing divine mystery."},
  {q:"What dual purpose did the Matsya avatara serve?",o:["Fighting demons and creating new worlds","Preserving the Vedas (sacred knowledge) AND preserving life (guiding Manu's ark) through the cosmic deluge","Establishing kingdoms on earth","Teaching philosophy to sages"],a:1,exp:"Matsya preserved both knowledge and life during the cosmic flood."}
- ]},
+ ]}
 ];
 
-const D2 = [
-];
-
-const D2B = [
-];
+const D2 = [];
+const D2B = [];
 
 export { D1, D1B, D2, D2B };
